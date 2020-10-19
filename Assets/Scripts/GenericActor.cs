@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Abstract: <c>Generic Actor</c> 
+/// Abstract: <c>GenericActor</c>
 /// All participant entities in battle are Generic Actors. This includes party members and enemies.
 /// Generic Actors have Health Points, Magic Points, Statistics, and a list of Skills.
 /// </summary>
@@ -16,8 +16,14 @@ public abstract class GenericActor : MonoBehaviour
     private List<GenericSkill> skills;
     private Sprite sprite;
 
-    public struct Stats
+    /// <summary>
+    /// Struct: <c>StatisticsBlock</c> 
+    /// This struct contains the stats of the Generic Actor.
+    /// </summary>
+    public struct StatisticsBlock
     {
+        //I could have simply made GenericActors possess a 6-element array of unsigned ints, 
+        //but this method allows for a more readable, abstract approach to stat manipulation (i.e. syntactic sugar)
         private uint attack;
         private uint mAttack;
         private uint defense;
@@ -25,7 +31,7 @@ public abstract class GenericActor : MonoBehaviour
         private uint speed;
         private uint luck;
 
-        public Stats(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+        public StatisticsBlock(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
             attack = atk;
             mAttack = mAtk;
@@ -35,7 +41,11 @@ public abstract class GenericActor : MonoBehaviour
             luck = luk;
         }
 
-        public void modAllStats(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+        /// <summary>
+        /// Method: <c>ModAllStats</c> 
+        /// To be called on level-up event, etc. For declaring permanent changes to a Generic Actor's stats block.
+        /// </summary>
+        public void ModAllStats(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
             Attack += atk;
             MAttack += mAtk;
@@ -52,14 +62,14 @@ public abstract class GenericActor : MonoBehaviour
         public uint Luck { get => luck; set => luck = value; }
     }
 
-    private Stats stats;
+    private StatisticsBlock stats;
 
     public uint CurrentHP { get => healthPoints; set => healthPoints = value; }
     public uint CurrentMP { get => magicPoints; set => magicPoints = value; }
     public uint HPMax { get => hpMax; private set => hpMax = value; }
     public uint MPMax { get => mpMax; private set => mpMax = value; }
 
-    public Stats AllStats { get => stats; private set => stats = value; }
+    public StatisticsBlock AllStats { get => stats; private set => stats = value; }
     public uint Attack { get => stats.Attack; private set => stats.Attack = value; }
     public uint Defense { get => stats.Defense; private set => stats.Defense = value; }
     public uint MAttack { get => stats.MAttack; private set => stats.MAttack = value; }

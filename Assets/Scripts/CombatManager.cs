@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour
-{
-    GenericActor[] battleParticipants;
-    GenericActor[] playerParty;
-    GenericActor[] enemyFormation;
-
-    // Start is called before the first frame update
-    void Start()
+namespace BattleElements { 
+    public class CombatManager : MonoBehaviour
     {
-        
-    }
+        GenericActor[] battleParticipants;
+        GenericActor[] playerParty;
+        GenericActor[] enemyFormation;
+        TurnTimeTable turns;
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Start is called before the first frame update
+        void Start()
+        {
+            playerParty = PartyData.PlayerParty;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

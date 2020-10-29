@@ -7,7 +7,7 @@ using UnityEngine;
 /// All participant entities in battle are Generic Actors. This includes party members and enemies.
 /// Generic Actors have Health Points, Magic Points, Statistics, and a list of Skills.
 /// </summary>
-public abstract class GenericActor : MonoBehaviour
+public abstract class GenericActor : MonoBehaviour, System.IComparable
 {
     private uint hpMax;
     private uint mpMax;
@@ -15,6 +15,14 @@ public abstract class GenericActor : MonoBehaviour
     private uint magicPoints;
     private List<GenericSkill> skills;
     private Sprite sprite;
+    private bool isDead = false;
+
+    private int atkMod;
+    private int defMod;
+    private int mAtkMod;
+    private int mDefMod;
+    private int spdMod;
+    private int lukMod;
 
     /// <summary>
     /// Struct: <c>StatisticsBlock</c> 
@@ -77,12 +85,47 @@ public abstract class GenericActor : MonoBehaviour
     public uint Speed { get => stats.Speed; private set => stats.Speed = value; }
     public uint Luck { get => stats.Luck; private set => stats.Luck = value; }
 
+    public int AtkMod { get => atkMod; set => atkMod = value; }
+    public int DefMod { get => defMod; set => defMod = value; }
+    public int MAtkMod { get => mAtkMod; set => mAtkMod = value; }
+    public int MDefMod { get => mDefMod; set => mDefMod = value; }
+    public int SpdMod { get => spdMod; set => spdMod = value; }
+    public int LukMod { get => lukMod; set => lukMod = value; }
+
     public abstract void StandardAttack(GenericActor target);
     public abstract void Defend();
     public abstract void UseItem(GenericItem item);
     public abstract void MoveToPosition(byte loc);
     public abstract void Flee();
     public abstract void UseSkill(GenericSkill skill);
+
+    public void Kill()
+    {
+        isDead = true;
+    }
+
+    public void Revive()
+    {
+        isDead = false;
+    }
+
+    public int CompareTo(object other)
+    {
+        if(!(other.GetType() != typeof(GenericActor))){
+            throw new System.Exception("REEEEEEEEE gimme an Actor!!!11!!");
+        }
+
+        if(this.Speed == ((GenericActor)other).Speed)
+        {
+            return 0;
+        } else if (this.Speed > ((GenericActor)other).Speed)
+        {
+            return 1;
+        } else
+        {
+            return -1;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

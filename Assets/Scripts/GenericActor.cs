@@ -111,7 +111,7 @@ public abstract class GenericActor : MonoBehaviour, System.IComparable
 
     public int CompareTo(object other)
     {
-        if(!(other.GetType() != typeof(GenericActor))){
+        if(other.GetType() != typeof(GenericActor)){
             throw new System.Exception("REEEEEEEEE gimme an Actor!!!11!!");
         }
 

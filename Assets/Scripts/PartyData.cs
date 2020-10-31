@@ -16,10 +16,9 @@ static public class PartyData
     public static uint Money { get => money; set => money = value; }
     public static List<GenericItem> Inventory { get => inventory; set => inventory = value; }
 
-    static GenericItem getItem()
+    static GenericItem useItem(GenericItem item)
     {
         return null;
     }
 
-    
 }

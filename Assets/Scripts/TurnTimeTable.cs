@@ -21,7 +21,7 @@ namespace BattleElements
 
         }
 
-        public System.Collections.Queue initializeTurnOrder()
+        private System.Collections.Queue initializeTurnOrder()
         {
             return null;
         }
@@ -31,7 +31,7 @@ namespace BattleElements
             return null;
         }
 
-        public void updateNextRound()
+        private void updateNextRound()
         {
 
         }

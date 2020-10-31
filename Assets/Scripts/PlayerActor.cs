@@ -6,7 +6,6 @@ public class PlayerActor : GenericActor
 {
 
     GenericItem weapon;
-    
 
     public override void Defend()
     {

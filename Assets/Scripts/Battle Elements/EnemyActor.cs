@@ -7,11 +7,6 @@
             throw new System.NotImplementedException();
         }
 
-        public override void MoveToPosition(byte loc)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override int StandardAttack()
         {
             throw new System.NotImplementedException();

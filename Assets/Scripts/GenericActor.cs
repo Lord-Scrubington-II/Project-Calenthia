@@ -13,7 +13,6 @@ public abstract class GenericActor : MonoBehaviour, System.IComparable
     private uint mpMax;
     private uint healthPoints;
     private uint magicPoints;
-    private List<GenericSkill> skills;
     private Sprite sprite;
     private bool isDead = false;
 
@@ -92,7 +91,7 @@ public abstract class GenericActor : MonoBehaviour, System.IComparable
     public int SpdMod { get => spdMod; set => spdMod = value; }
     public int LukMod { get => lukMod; set => lukMod = value; }
 
-    public abstract void StandardAttack(GenericActor target);
+    public abstract int StandardAttack(GenericActor target);
     public abstract void Defend();
     public abstract void UseItem(GenericItem item);
     public abstract void MoveToPosition(byte loc);

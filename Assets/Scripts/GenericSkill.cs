@@ -7,6 +7,10 @@ public abstract class GenericSkill : MonoBehaviour
     private ParticleSystem particles;
     private int baseDamage;
     private int baseAccuracy;
+    private enum damageType
+    {
+
+    }
 
     // Start is called before the first frame update
     void Start()

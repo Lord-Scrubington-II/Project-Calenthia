@@ -42,6 +42,7 @@ namespace BattleElements
             playerParty.CopyTo(battleParticipants, 0);
             enemyFormation.CopyTo(battleParticipants, playerParty.Length);
             turns = GameObject.Find("TimeTable").GetComponent<TurnTimeTable>();
+            turns.initializeTurnOrder(battleParticipants);
             myTurn = (GenericActor)turns.CurrentRound.Dequeue();
             if (myTurn.GetType() == typeof(PlayerActor))
                 turn = TurnState.PlayerTurn;

@@ -40,7 +40,7 @@ public class Knight : PlayerActor
         this.AllStats = new StatisticsBlock(BASE_ATK, BASE_MATK, BASE_DEF, BASE_MDEF, BASE_SPD, BASE_LUK);
 
         //load starting skills into skill list
-        this.Skills.Add(null);
+        //this.Skills.Add(null);
     }
 
     public override void UseSkill(GenericSkill skill)

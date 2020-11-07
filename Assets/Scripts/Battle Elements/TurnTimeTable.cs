@@ -15,9 +15,9 @@ namespace BattleElements
         public Queue CurrentRound { get => currentRound; set => currentRound = value; }
         public Queue NextRound { get => nextRound; set => nextRound = value; }
 
-        private System.Collections.Queue initializeTurnOrder(GenericActor[] actors)
+        public void initializeTurnOrder(GenericActor[] actors)
         {
-            return null;
+            
         }
 
         public GenericActor advanceTurn()
@@ -30,6 +30,7 @@ namespace BattleElements
 
         }
         private void Start()
+
         {
             this.name = "TimeTable";
         }

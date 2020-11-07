@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 static public class PartyData
 {
     static PlayerActor[] playerParty = new PlayerActor[4];
+    public static PlayerActor[] playerFrontline = new PlayerActor[3];
+    public static PlayerActor[] playerBackline = new PlayerActor[3];
     static PlayerActor leader;
     static Sprite leaderSprite;
     static uint money;

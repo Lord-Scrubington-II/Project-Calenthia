@@ -6,8 +6,8 @@ using UnityEngine;
 static public class PartyData
 {
     static PlayerActor[] playerParty = new PlayerActor[4];
-    public static PlayerActor[] playerFrontline = new PlayerActor[3];
-    public static PlayerActor[] playerBackline = new PlayerActor[3];
+    static PlayerActor[] playerFrontline = new PlayerActor[3];
+    static PlayerActor[] playerBackline = new PlayerActor[3];
     static PlayerActor leader;
     static Sprite leaderSprite;
     static uint money;
@@ -18,6 +18,8 @@ static public class PartyData
     public static Sprite LeaderSprite { get => leaderSprite;}
     public static uint Money { get => money; set => money = value; }
     public static List<GenericItem> Inventory { get => inventory; set => inventory = value; }
+    public static PlayerActor[] PlayerFrontline { get => playerFrontline; set => playerFrontline = value; }
+    public static PlayerActor[] PlayerBackline { get => playerBackline; set => playerBackline = value; }
 
     static GenericItem useItem(GenericItem item)
     {

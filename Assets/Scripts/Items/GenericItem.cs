@@ -1,5 +1,7 @@
+
 ﻿using UnityEngine;
 public abstract class GenericItem: ScriptableObject{
+
 
     public ItemType itemType;
     public int amount;

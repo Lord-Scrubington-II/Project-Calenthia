@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerActor : GenericActor
+public abstract class PlayerActor : GenericActor
 {
 
     GenericItem weapon;
-
-    public override void Defend()
-    {
-
-    }
+    bool implementsMultipleStandardAttacks;
 
     public override void Flee()
     {
-
+        
     }
 
     public override void MoveToPosition(byte loc)
@@ -22,9 +18,9 @@ public class PlayerActor : GenericActor
 
     }
 
-    public override void StandardAttack(GenericActor target)
+    public override int StandardAttack()
     {
-
+        return -1;
     }
 
     public override void UseItem(GenericItem item)

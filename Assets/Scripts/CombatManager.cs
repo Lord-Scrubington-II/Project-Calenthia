@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace BattleElements
@@ -47,11 +48,12 @@ namespace BattleElements
         }
 
         static bool StandardAttack(GenericActor target)
-        {   
-            int basedmg = myTurn.StandardAttack();
+        {
             state = BattleState.During;
+            int basedmg = myTurn.StandardAttack();
             //TODO: Call function from monobehavior attached to UI to display damage
             //Actual dmg calculation
+            state = BattleState.After;
             return true;
         }
 
@@ -59,6 +61,13 @@ namespace BattleElements
         {
             state = BattleState.During;
             item.Apply(myTurn);
+            //ToDO animation
+            state = BattleState.After;
+            return true;
+        }
+
+        static bool Defend()
+        {
             return true;
         }
 

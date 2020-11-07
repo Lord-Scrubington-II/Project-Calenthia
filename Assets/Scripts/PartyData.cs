@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
-public class PartyData : ScriptableObject
+static public class PartyData
 {
-    [SerializeField] static PlayerActor[] playerParty = new PlayerActor[4];
-    [SerializeField] static PlayerActor leader;
-    [SerializeField] static Sprite leaderSprite;
-    [SerializeField] static uint money;
-    [SerializeField] static List<GenericItem> inventory;
+    static PlayerActor[] playerParty = new PlayerActor[4];
+    public static PlayerActor[] playerFrontline = new PlayerActor[3];
+    public static PlayerActor[] playerBackline = new PlayerActor[3];
+    static PlayerActor leader;
+    static Sprite leaderSprite;
+    static uint money;
+    static List<GenericItem> inventory;
 
     public static PlayerActor[] PlayerParty { get => playerParty; set => playerParty = value; }
     public static PlayerActor Leader { get => leader; set => leader = value; }
-    public static Sprite LeaderSprite { get => leaderSprite;}
+    public static Sprite LeaderSprite { get => leader.GetComponent<Sprite>();}
     public static uint Money { get => money; set => money = value; }
     public static List<GenericItem> Inventory { get => inventory; set => inventory = value; }
 
@@ -20,4 +23,5 @@ public class PartyData : ScriptableObject
     {
         return null;
     }
+
 }

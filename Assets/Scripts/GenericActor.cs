@@ -92,7 +92,7 @@ public abstract class GenericActor : MonoBehaviour, System.IComparable
     public int SpdMod { get => spdMod; set => spdMod = value; }
     public int LukMod { get => lukMod; set => lukMod = value; }
 
-    public abstract int StandardAttack(GenericActor target);
+    public abstract int StandardAttack();
     public abstract void Defend();
     public abstract void UseItem(GenericItem item);
     public abstract void MoveToPosition(byte loc);

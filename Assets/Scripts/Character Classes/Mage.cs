@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class Mage : PlayerActor
 {
     [SerializeField] private readonly uint BASE_HP = 80;
@@ -23,24 +24,11 @@ public class Mage : PlayerActor
     [SerializeField] private readonly uint MDEFG = 8;
     [SerializeField] private readonly uint SPDG = 6;
     [SerializeField] private readonly uint LUKG = 4;
-
-    public override int StandardAttack()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void UseSkill(GenericSkill skill)
-    {
-        throw new System.NotImplementedException();
-    }
-
     private void Awake()
     {
         //load from json all mutable fields
 
         //if no json, load base lv.1 stats
-        this.name = "Dietrich";
-
         this.isMartial = false;
 
         //stats declaration
@@ -52,4 +40,15 @@ public class Mage : PlayerActor
         //load starting skills into skill list
         this.Skills.Add(null);
     }
+    public override int StandardAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void UseSkill(GenericSkill skill)
+    {
+        throw new System.NotImplementedException();
+    }
+
+
 }

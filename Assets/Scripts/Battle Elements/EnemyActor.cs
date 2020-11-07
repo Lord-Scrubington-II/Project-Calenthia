@@ -2,11 +2,6 @@
 {
     internal class EnemyActor : GenericActor
     {
-        public override void Defend()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void Flee()
         {
             throw new System.NotImplementedException();

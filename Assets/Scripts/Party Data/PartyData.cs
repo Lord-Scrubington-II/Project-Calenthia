@@ -15,7 +15,7 @@ static public class PartyData
 
     public static PlayerActor[] PlayerParty { get => playerParty; set => playerParty = value; }
     public static PlayerActor Leader { get => leader; set => leader = value; }
-    public static Sprite LeaderSprite { get => leader.GetComponent<Sprite>();}
+    public static Sprite LeaderSprite { get => leaderSprite;}
     public static uint Money { get => money; set => money = value; }
     public static List<GenericItem> Inventory { get => inventory; set => inventory = value; }
 

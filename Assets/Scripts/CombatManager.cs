@@ -37,7 +37,8 @@ namespace BattleElements
 
         static bool StandardAttack(GenericActor target)
         {
-            int dmg = myTurn.StandardAttack(target);
+            int basedmg = myTurn.StandardAttack();
+            //TODO: Call function from monobehavior attached to UI to display damage 
             return true;
 
         }

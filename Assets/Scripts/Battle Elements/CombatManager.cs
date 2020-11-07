@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEditorInternal;
+using UnityEngine;
 
 namespace BattleElements
 {
@@ -40,7 +41,7 @@ namespace BattleElements
             battleParticipants = new GenericActor[playerParty.Length + enemyFormation.Length];
             playerParty.CopyTo(battleParticipants, 0);
             enemyFormation.CopyTo(battleParticipants, playerParty.Length);
-            turns = new TurnTimeTable(battleParticipants);
+            turns = GameObject.Find("TimeTable").GetComponent<TurnTimeTable>();
             myTurn = (GenericActor)turns.CurrentRound.Dequeue();
             if (myTurn.GetType() == typeof(PlayerActor))
                 turn = TurnState.PlayerTurn;

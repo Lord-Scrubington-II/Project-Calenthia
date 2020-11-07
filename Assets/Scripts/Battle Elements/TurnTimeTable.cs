@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BattleElements
 { 
-    public class TurnTimeTable
+    public class TurnTimeTable: MonoBehaviour
     {
         private System.Collections.Queue queueOne;
         private System.Collections.Queue queueTwo;
@@ -15,13 +15,7 @@ namespace BattleElements
         public Queue CurrentRound { get => currentRound; set => currentRound = value; }
         public Queue NextRound { get => nextRound; set => nextRound = value; }
 
-        
-        public TurnTimeTable(GenericActor[] actors)
-        {
-
-        }
-
-        private System.Collections.Queue initializeTurnOrder()
+        private System.Collections.Queue initializeTurnOrder(GenericActor[] actors)
         {
             return null;
         }
@@ -34,6 +28,10 @@ namespace BattleElements
         private void updateNextRound()
         {
 
+        }
+        private void Start()
+        {
+            this.name = "TimeTable";
         }
     }
 }

@@ -14,6 +14,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     private uint healthPoints;
     private uint magicPoints;
     private Sprite sprite;
+    private List<GenericSkill> skills;
     private bool isDead = false;
 
     private int atkMod;
@@ -71,33 +72,35 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
 
     private StatisticsBlock stats;
 
+    //HP & MP
     public uint CurrentHP { get => healthPoints; set => healthPoints = value; }
     public uint CurrentMP { get => magicPoints; set => magicPoints = value; }
-    public uint HPMax { get => hpMax; private set => hpMax = value; }
-    public uint MPMax { get => mpMax; private set => mpMax = value; }
+    public uint HPMax { get => hpMax; protected set => hpMax = value; }
+    public uint MPMax { get => mpMax; protected set => mpMax = value; }
 
-    public StatisticsBlock AllStats { get => stats; private set => stats = value; }
-    public uint Attack { get => stats.Attack; private set => stats.Attack = value; }
-    public uint Defense { get => stats.Defense; private set => stats.Defense = value; }
-    public uint MAttack { get => stats.MAttack; private set => stats.MAttack = value; }
-    public uint MDefense { get => stats.MDefense; private set => stats.MDefense = value; }
-    public uint Speed { get => stats.Speed; private set => stats.Speed = value; }
-    public uint Luck { get => stats.Luck; private set => stats.Luck = value; }
+    //properties on the Statistics Block
+    public StatisticsBlock AllStats { get => stats; protected set => stats = value; }
+    public uint Attack { get => stats.Attack; protected set => stats.Attack = value; }
+    public uint Defense { get => stats.Defense; protected set => stats.Defense = value; }
+    public uint MAttack { get => stats.MAttack; protected set => stats.MAttack = value; }
+    public uint MDefense { get => stats.MDefense; protected set => stats.MDefense = value; }
+    public uint Speed { get => stats.Speed; protected set => stats.Speed = value; }
+    public uint Luck { get => stats.Luck; protected set => stats.Luck = value; }
 
+    //stat mods
     public int AtkMod { get => atkMod; set => atkMod = value; }
     public int DefMod { get => defMod; set => defMod = value; }
     public int MAtkMod { get => mAtkMod; set => mAtkMod = value; }
     public int MDefMod { get => mDefMod; set => mDefMod = value; }
     public int SpdMod { get => spdMod; set => spdMod = value; }
     public int LukMod { get => lukMod; set => lukMod = value; }
+    public List<GenericSkill> Skills { get => skills; protected set => skills = value; }
 
     public abstract int StandardAttack();
     public void Defend()
     {
         //TODO: Apply buff "defending" to the caller
     }
-    public abstract void UseItem(GenericItem item);
-    public abstract void MoveToPosition(byte loc);
     public abstract void Flee();
     public abstract void UseSkill(GenericSkill skill);
 

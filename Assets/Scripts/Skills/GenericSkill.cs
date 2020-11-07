@@ -9,18 +9,13 @@ public abstract class GenericSkill : ScriptableObject
     private int baseAccuracy;
     private enum damageType
     {
-
+        Fire,
+        Water,
+        Wind,
+        Lightning,
+        Light,
+        Earth
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    invokeSkill();
 }

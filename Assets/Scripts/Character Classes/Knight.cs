@@ -47,4 +47,9 @@ public class Knight : PlayerActor
     {
         
     }
+
+    public override int StandardAttack()
+    {
+        throw new System.NotImplementedException();
+    }
 }

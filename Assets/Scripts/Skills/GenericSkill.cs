@@ -8,6 +8,7 @@ public abstract class GenericSkill : ScriptableObject
     private ParticleSystem particles;
     private int baseDamage;
     private int baseAccuracy;
+    protected string skillName;
     private enum damageType
     {
         Fire,
@@ -18,5 +19,5 @@ public abstract class GenericSkill : ScriptableObject
         Earth
     }
 
-    invokeSkill();
+    public abstract void InvokeSkill();
 }

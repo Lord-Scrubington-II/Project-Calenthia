@@ -16,6 +16,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     private Sprite sprite;
     private List<GenericSkill> skills;
     private bool isDead = false;
+    private int level;
 
     private int atkMod;
     private int defMod;
@@ -71,6 +72,8 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     }
 
     private StatisticsBlock stats;
+    public int Level { get => level; set => level = value; }
+
 
     //HP & MP
     public uint CurrentHP { get => healthPoints; set => healthPoints = value; }

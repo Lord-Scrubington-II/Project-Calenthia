@@ -24,6 +24,16 @@ public class Mage : PlayerActor
     [SerializeField] private readonly uint SPDG = 6;
     [SerializeField] private readonly uint LUKG = 4;
 
+    public override int StandardAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void UseSkill(GenericSkill skill)
+    {
+        throw new System.NotImplementedException();
+    }
+
     private void Awake()
     {
         //load from json all mutable fields

@@ -6,11 +6,9 @@ public abstract class PlayerActor : GenericActor
 {
     
     GenericItem weapon;
-    private byte level;
     protected bool isMartial;
     private GrowthRateMatrix growthRates;
 
-    public byte Level { get => level; set => level = value; }
     public GrowthRateMatrix AllGrowthRates { get => growthRates; set => growthRates = value; }
 
     public struct GrowthRateMatrix
@@ -42,7 +40,8 @@ public abstract class PlayerActor : GenericActor
 
     public override void Flee()
     {
-        //flee based on speed of caller, chance to flee is determined by differential between speed of invoker and enemy average
+        //flee based on speed of caller, 
+        //base chance to flee is determined by differential between level of invoker and level of enemy.
         //invoke scenemanager if the flee check passes
     }
 
@@ -52,5 +51,17 @@ public abstract class PlayerActor : GenericActor
 
     }
     */
+
+    public void LevelUp()
+    {
+        uint ATKDelta = AllGrowthRates.AttackGrowth;
+        uint MATKDelta = AllGrowthRates.MAttackGrowth;
+        uint DEFDelta = AllGrowthRates.DefenseGrowth;
+        uint MDEFDelta = AllGrowthRates.MDefenseGrowth;
+        uint SPDDelta = AllGrowthRates.SpeedGrowth;
+        uint LUKDelta = AllGrowthRates.LuckGrowth;
+
+        this.AllStats.ModAllStats(ATKDelta, MATKDelta, DEFDelta, MDEFDelta, SPDDelta, LUKDelta);
+    }
 
 }

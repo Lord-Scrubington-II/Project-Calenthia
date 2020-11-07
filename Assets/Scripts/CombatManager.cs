@@ -4,8 +4,11 @@ namespace BattleElements
 {
     public static class CombatManager
     {   //Game State enum, to be used fir determining the game's state
-        public enum BattleState { PlayerTurn, EnemyTurn, }
+        public enum TurnState { PlayerTurn, EnemyTurn, }
+        public static TurnState turn;
+        public enum BattleState{ Preturn, During, After}
         public static BattleState state;
+
 
         static GenericActor[] battleParticipants;
         static GenericActor[] playerParty;
@@ -25,11 +28,18 @@ namespace BattleElements
             enemyFormation.CopyTo(battleParticipants, playerParty.Length);
             turns = new TurnTimeTable(battleParticipants);
             myTurn = (GenericActor)turns.CurrentRound.Dequeue();
-            //Done initializing
             if (myTurn.GetType() == typeof(PlayerActor))
-                state = BattleState.PlayerTurn;
+                turn = TurnState.PlayerTurn;
             else
-                state = BattleState.EnemyTurn;
+                turn = TurnState.EnemyTurn;
+            state = BattleState.Preturn;
+        }
+
+        static bool StandardAttack(GenericActor target)
+        {
+            int dmg = myTurn.StandardAttack(target);
+            return true;
+
         }
 
     }

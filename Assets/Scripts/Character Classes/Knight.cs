@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "BookOfTheKnight", menuName = "Character Classes", order = 1)]
 public class Knight : PlayerActor
 {
     [SerializeField] private readonly uint BASE_HP = 100;
@@ -29,7 +30,6 @@ public class Knight : PlayerActor
         //load from json all fields
 
         //if no json, load base lv.1 stats
-        this.name = "Talezar";
 
         this.isMartial = true;
 

@@ -7,7 +7,7 @@ using UnityEngine;
 /// All participant entities in battle are Generic Actors. This includes party members and enemies.
 /// Generic Actors have Health Points, Magic Points, Statistics, and a list of Skills.
 /// </summary>
-public abstract class GenericActor : MonoBehaviour, System.IComparable
+public abstract class GenericActor : ScriptableObject, System.IComparable
 {
     private uint hpMax;
     private uint mpMax;
@@ -50,7 +50,7 @@ public abstract class GenericActor : MonoBehaviour, System.IComparable
 
         /// <summary>
         /// Method: <c>ModAllStats</c> 
-        /// To be called on level-up event, etc. For declaring permanent changes to a Generic Actor's stats block.
+        /// To be called on level-up event, etc. For declaring /permanent/ changes to a Generic Actor's stats block.
         /// </summary>
         public void ModAllStats(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
@@ -91,8 +91,11 @@ public abstract class GenericActor : MonoBehaviour, System.IComparable
     public int SpdMod { get => spdMod; set => spdMod = value; }
     public int LukMod { get => lukMod; set => lukMod = value; }
 
-    public abstract int StandardAttack(GenericActor target);
-    public abstract void Defend();
+    public abstract int StandardAttack();
+    public void Defend()
+    {
+        //TODO: Apply buff "defending" to the caller
+    }
     public abstract void UseItem(GenericItem item);
     public abstract void MoveToPosition(byte loc);
     public abstract void Flee();

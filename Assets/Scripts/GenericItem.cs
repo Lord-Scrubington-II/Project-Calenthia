@@ -1,4 +1,7 @@
-﻿public class GenericItem {
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class GenericItem : ScriptableObject {
 
     public ItemType itemType;
     public int amount;

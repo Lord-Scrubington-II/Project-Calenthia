@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GenericSkill : MonoBehaviour
+public abstract class GenericSkill : ScriptableObject
 {
     private ParticleSystem particles;
     private int baseDamage;

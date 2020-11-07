@@ -15,6 +15,7 @@ namespace BattleElements
         static GenericActor[] enemyFormation;
         static TurnTimeTable turns;
         static GenericActor myTurn;
+        
 
         //Static Constructor for the static combat manager will will be autmatically called at the the
         //first reference to it
@@ -37,7 +38,7 @@ namespace BattleElements
 
         static bool StandardAttack(GenericActor target)
         {
-            int dmg = myTurn.StandardAttack(target);
+            int baseDmg = myTurn.StandardAttack();
             return true;
 
         }

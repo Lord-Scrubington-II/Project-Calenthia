@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "ArcanumOfTheMage", menuName = "Character Classes", order = 2)]
 public class Mage : PlayerActor
 {
     [SerializeField] private readonly uint BASE_HP = 80;

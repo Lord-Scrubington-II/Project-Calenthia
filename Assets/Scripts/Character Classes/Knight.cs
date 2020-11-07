@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "BookOfTheKnight", menuName = "Character Classes", order = 1)]
 public class Knight : PlayerActor
 {
     [SerializeField] private readonly uint BASE_HP = 100;

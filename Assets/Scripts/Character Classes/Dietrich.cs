@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Dietrich : MonoBehaviour
 {
-    Mage characterClass;
+    Mage characterClass = GameObject.Find("ArcanumOfTheMage").GetComponent<Mage>();
     Sprite characterSprite;
 
     // Start is called before the first frame update

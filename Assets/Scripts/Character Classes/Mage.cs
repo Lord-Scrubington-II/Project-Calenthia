@@ -34,7 +34,7 @@ public class Mage : PlayerActor
         //stats declaration
         this.HPMax = this.CurrentHP = BASE_HP;
         this.MPMax = this.CurrentMP = BASE_MP;
-        this.AllGrowthRates = new GrowthRateMatrix(ATKG, MATKG, DEFG, MDEFG, SPDG, LUKG);
+        this.AllGrowthRates = new GrowthRateMatrix(HPG, MPG, ATKG, MATKG, DEFG, MDEFG, SPDG, LUKG);
         this.AllStats = new StatisticsBlock(BASE_ATK, BASE_MATK, BASE_DEF, BASE_MDEF, BASE_SPD, BASE_LUK);
 
         //load starting skills into skill list

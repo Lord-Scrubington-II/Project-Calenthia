@@ -12,3 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9992d4de5254ae4fbf10ae80ff381fd, type: 3}
   m_Name: ArcanumOfTheMage
   m_EditorClassIdentifier: 
+  hpMax: 80
+  mpMax: 35
+  healthPoints: 80
+  magicPoints: 35
+  isDead: 0
+  level: 0
+  atkMod: 0
+  defMod: 0
+  mAtkMod: 0
+  mDefMod: 0
+  spdMod: 0
+  lukMod: 0
+  stats:
+    attack: 10
+    mAttack: 23
+    defense: 15
+    mDefense: 20
+    speed: 18
+    luck: 14
+  isMartial: 0

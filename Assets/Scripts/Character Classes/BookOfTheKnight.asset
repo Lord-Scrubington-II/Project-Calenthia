@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f845b794b395874aa4f5896f89369ee, type: 3}
+  m_Name: BookOfTheKnight
+  m_EditorClassIdentifier: 
+  hpMax: 0
+  mpMax: 20
+  healthPoints: 100
+  magicPoints: 20
+  isDead: 0
+  level: 0
+  atkMod: 0
+  defMod: 0
+  mAtkMod: 0
+  mDefMod: 0
+  spdMod: 0
+  lukMod: 0
+  stats:
+    attack: 20
+    magicAttack: 10
+    defense: 20
+    magicDefense: 17
+    speed: 12
+    luck: 16
+  growthRates:
+    hp: 12
+    mp: 3
+    attack: 8
+    mAttack: 2
+    defense: 8
+    mDefense: 5
+    speed: 4
+    luck: 4

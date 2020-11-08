@@ -9,43 +9,44 @@ using UnityEngine;
 /// </summary>
 public abstract class GenericActor : ScriptableObject, System.IComparable
 {
-    private uint hpMax;
-    private uint mpMax;
-    private uint healthPoints;
-    private uint magicPoints;
+    [SerializeField] private uint hpMax;
+    [SerializeField] private uint mpMax;
+    [SerializeField] private uint healthPoints;
+    [SerializeField] private uint magicPoints;
     private Sprite sprite;
     private List<GenericSkill> skills;
-    private bool isDead = false;
-    private int level;
+    [SerializeField] private bool isDead = false;
+    [SerializeField] private int level;
 
-    private int atkMod;
-    private int defMod;
-    private int mAtkMod;
-    private int mDefMod;
-    private int spdMod;
-    private int lukMod;
+    [SerializeField] private int atkMod;
+    [SerializeField] private int defMod;
+    [SerializeField] private int mAtkMod;
+    [SerializeField] private int mDefMod;
+    [SerializeField] private int spdMod;
+    [SerializeField] private int lukMod;
 
     /// <summary>
     /// Struct: <c>StatisticsBlock</c> 
     /// This struct contains the stats of the Generic Actor.
     /// </summary>
+    [System.Serializable]
     public struct StatisticsBlock
     {
         //I could have simply made GenericActors possess a 6-element array of unsigned ints, 
         //but this method allows for a more readable, abstract approach to stat manipulation (i.e. syntactic sugar)
-        private uint attack;
-        private uint mAttack;
-        private uint defense;
-        private uint mDefense;
-        private uint speed;
-        private uint luck;
+        [SerializeField] private uint attack;
+        [SerializeField] private uint magicAttack;
+        [SerializeField] private uint defense;
+        [SerializeField] private uint magicDefense;
+        [SerializeField] private uint speed;
+        [SerializeField] private uint luck;
 
         public StatisticsBlock(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
             attack = atk;
-            mAttack = mAtk;
+            magicAttack = mAtk;
             defense = def;
-            mDefense = mDef;
+            magicDefense = mDef;
             speed = spd;
             luck = luk;
         }
@@ -57,21 +58,21 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
         public void ModAllStats(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
             Attack += atk;
-            MAttack += mAtk;
+            MagicAttack += mAtk;
             Defense += def;
-            MDefense += mDef;
+            MagicDefense += mDef;
             Speed += spd;
             Luck += luk;
         }
         public uint Attack { get => attack; set => attack = value; }
-        public uint MAttack { get => mAttack; set => mAttack = value; }
+        public uint MagicAttack { get => magicAttack; set => magicAttack = value; }
         public uint Defense { get => defense; set => defense = value; }
-        public uint MDefense { get => mDefense; set => mDefense = value; }
+        public uint MagicDefense { get => magicDefense; set => magicDefense = value; }
         public uint Speed { get => speed; set => speed = value; }
         public uint Luck { get => luck; set => luck = value; }
     }
 
-    private StatisticsBlock stats;
+    [SerializeField] private StatisticsBlock stats;
     public int Level { get => level; set => level = value; }
 
 
@@ -85,8 +86,8 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     public StatisticsBlock AllStats { get => stats; protected set => stats = value; }
     public uint Attack { get => stats.Attack; protected set => stats.Attack = value; }
     public uint Defense { get => stats.Defense; protected set => stats.Defense = value; }
-    public uint MAttack { get => stats.MAttack; protected set => stats.MAttack = value; }
-    public uint MDefense { get => stats.MDefense; protected set => stats.MDefense = value; }
+    public uint MagicAttack { get => stats.MagicAttack; protected set => stats.MagicAttack = value; }
+    public uint MagicDefense { get => stats.MagicDefense; protected set => stats.MagicDefense = value; }
     public uint Speed { get => stats.Speed; protected set => stats.Speed = value; }
     public uint Luck { get => stats.Luck; protected set => stats.Luck = value; }
 

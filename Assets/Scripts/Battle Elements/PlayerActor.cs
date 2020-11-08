@@ -7,21 +7,26 @@ public abstract class PlayerActor : GenericActor
     
     GenericItem weapon;
     protected bool isMartial;
-    private GrowthRateMatrix growthRates;
 
-    public GrowthRateMatrix AllGrowthRates { get => growthRates; set => growthRates = value; }
+    public GrowthRateMatrix AllGrowthRates { get => growthRates; protected set => growthRates = value; }
 
+    [System.Serializable]
     public struct GrowthRateMatrix
     {
-        private uint attack;
-        private uint mAttack;
-        private uint defense;
-        private uint mDefense;
-        private uint speed;
-        private uint luck;
+        [SerializeField] private uint hp;
+        [SerializeField] private uint mp;
+        [SerializeField] private uint attack;
+        [SerializeField] private uint mAttack;
+        [SerializeField] private uint defense;
+        [SerializeField] private uint mDefense;
+        [SerializeField] private uint speed;
+        [SerializeField] private uint luck;
 
-        public GrowthRateMatrix(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+
+        public GrowthRateMatrix(uint HP, uint MP, uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
+            hp = HP;
+            mp = MP;
             attack = atk;
             mAttack = mAtk;
             defense = def;
@@ -30,13 +35,18 @@ public abstract class PlayerActor : GenericActor
             luck = luk;
         }
 
-        public uint AttackGrowth { get => attack;}
-        public uint MAttackGrowth { get => mAttack;}
-        public uint DefenseGrowth { get => defense;}
-        public uint MDefenseGrowth { get => mDefense;}
-        public uint SpeedGrowth { get => speed;}
-        public uint LuckGrowth { get => luck;}
+
+        public uint AttackGrowth { get => attack; set => attack = value; }
+        public uint MAttackGrowth { get => mAttack; set => attack = value; }
+        public uint DefenseGrowth { get => defense; set => attack = value; }
+        public uint MDefenseGrowth { get => mDefense; set => attack = value; }
+        public uint SpeedGrowth { get => speed; set => attack = value; }
+        public uint LuckGrowth { get => luck; set => attack = value; }
+        public uint HPGrowth { get => hp; set => hp = value; }
+        public uint MPGrowth { get => mp; set => mp = value; }
     }
+
+    [SerializeField] private GrowthRateMatrix growthRates;
 
     public override void Flee()
     {
@@ -54,6 +64,8 @@ public abstract class PlayerActor : GenericActor
 
     public void LevelUp()
     {
+        uint HPMaxDelta = AllGrowthRates.HPGrowth;
+        uint MPMaxDelta = AllGrowthRates.MPGrowth;
         uint ATKDelta = AllGrowthRates.AttackGrowth;
         uint MATKDelta = AllGrowthRates.MAttackGrowth;
         uint DEFDelta = AllGrowthRates.DefenseGrowth;
@@ -62,6 +74,8 @@ public abstract class PlayerActor : GenericActor
         uint LUKDelta = AllGrowthRates.LuckGrowth;
 
         this.AllStats.ModAllStats(ATKDelta, MATKDelta, DEFDelta, MDEFDelta, SPDDelta, LUKDelta);
+        this.HPMax = HPMaxDelta;
+        this.MPMax = MPMaxDelta;
+        this.Level++;
     }
-
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ArcanumOfTheMage", menuName = "Character Classes", order = 2)]
+[CreateAssetMenu(fileName = "ArcanumOfTheMage", menuName = "Character Classes/Mage", order = 2)]
 public class Mage : PlayerActor
 {
     [SerializeField] private readonly uint BASE_HP = 80;
@@ -38,7 +38,7 @@ public class Mage : PlayerActor
         this.AllStats = new StatisticsBlock(BASE_ATK, BASE_MATK, BASE_DEF, BASE_MDEF, BASE_SPD, BASE_LUK);
 
         //load starting skills into skill list
-        this.Skills.Add(null);
+        //this.Skills.Add(null);
     }
     public override int StandardAttack()
     {

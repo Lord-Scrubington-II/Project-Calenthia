@@ -13,6 +13,8 @@ public abstract class PlayerActor : GenericActor
 
     public struct GrowthRateMatrix
     {
+        private uint hp;
+        private uint mp;
         private uint attack;
         private uint mAttack;
         private uint defense;
@@ -20,8 +22,10 @@ public abstract class PlayerActor : GenericActor
         private uint speed;
         private uint luck;
 
-        public GrowthRateMatrix(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+        public GrowthRateMatrix(uint HP, uint MP, uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
         {
+            hp = HP;
+            mp = MP;
             attack = atk;
             mAttack = mAtk;
             defense = def;

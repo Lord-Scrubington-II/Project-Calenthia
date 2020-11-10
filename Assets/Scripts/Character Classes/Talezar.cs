@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Talezar : MonoBehaviour
 {
-    Knight characterClass;
+    [SerializeField] Knight characterClass;
     Sprite characterSprite;
 
     // Start is called before the first frame update

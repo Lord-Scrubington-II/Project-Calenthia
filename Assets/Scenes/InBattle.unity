@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 870493538}
   - component: {fileID: 870493537}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Talezar, the Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a004e9b8619e144ea43698bc073239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterClass: {fileID: 11400000, guid: a2ba79bf38bcc4e499f86274c24c2adc, type: 2}
 --- !u!65 &870493538
 BoxCollider:
   m_ObjectHideFlags: 0

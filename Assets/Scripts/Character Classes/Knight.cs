@@ -33,13 +33,10 @@ public class Knight : PlayerActor
 
         this.isMartial = true;
 
-        //stats declaration
-        this.HPMax = this.CurrentHP = BASE_HP;
-        this.MPMax = this.CurrentMP = BASE_MP;
-        this.AllGrowthRates = new GrowthRateMatrix(HPG, MPG, ATKG, MATKG, DEFG, MDEFG, SPDG, LUKG);
-        this.AllStats = new StatisticsBlock(BASE_ATK, BASE_MATK, BASE_DEF, BASE_MDEF, BASE_SPD, BASE_LUK);
+        //lv. 1 stats declaration
+        LoadLevelOneStats();
 
-        //load starting skills into skill list
+        //load starting skills into skills list
         //this.Skills.Add(null);
     }
 
@@ -51,5 +48,14 @@ public class Knight : PlayerActor
     public override int StandardAttack()
     {
         throw new System.NotImplementedException();
+    }
+
+    public override void LoadLevelOneStats()
+    {
+        this.HPMax = this.CurrentHP = BASE_HP;
+        this.MPMax = this.CurrentMP = BASE_MP;
+        this.AllGrowthRates = new GrowthRateMatrix(HPG, MPG, ATKG, MATKG, DEFG, MDEFG, SPDG, LUKG);
+        this.AllStats = new StatisticsBlock(BASE_ATK, BASE_MATK, BASE_DEF, BASE_MDEF, BASE_SPD, BASE_LUK);
+        this.Level = 1;
     }
 }

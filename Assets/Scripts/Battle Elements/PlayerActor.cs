@@ -6,6 +6,7 @@ public abstract class PlayerActor : GenericActor
 {
     
     GenericItem weapon;
+    GenericItem armour;
     protected bool isMartial;
 
     public GrowthRateMatrix AllGrowthRates { get => growthRates; protected set => growthRates = value; }
@@ -78,4 +79,6 @@ public abstract class PlayerActor : GenericActor
         this.MPMax = MPMaxDelta;
         this.Level++;
     }
+
+    public abstract void LoadLevelOneStats();
 }

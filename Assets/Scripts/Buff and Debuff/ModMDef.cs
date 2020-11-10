@@ -22,4 +22,5 @@ public class ModMDef : ChangeMod
         this.duration = --dur;
         return dur;
     }
+
 }

@@ -10,11 +10,12 @@ namespace BattleElements
 
     public static class CombatManager
     {
-        //Indicies for positions in front and backlines
+        //Indices for positions in front and backlines
         static readonly byte LEFT = 0;
         static readonly byte CENTER = 1;
         static readonly byte RIGHT = 2;
-        //Game State enum, to be used fir determining the game's state
+
+        //Game State enum, to be used for determining the game's state
         public enum TurnState { PlayerTurn, EnemyTurn, }
         public static TurnState turn;
         public enum BattleState{ Preturn, During, After}
@@ -29,7 +30,7 @@ namespace BattleElements
         static TurnTimeTable turns;
         static GenericActor myTurn;
   
-        //Static Constructor for the static combat manager will will be autmatically called at the the
+        //Static Constructor for the static combat manager will be autmatically called at the the
         //first reference to it
         static CombatManager()
         {
@@ -93,7 +94,7 @@ namespace BattleElements
         static bool Defend()
         {
             state = BattleState.During;
-            //TODO Apply Buff Defense to player that buffs defense, and temp 999 speed increase to move the, to top of next Round
+            //TODO Apply Buff Defense to player that buffs defense, and temp 999 speed increase to move them to top of next Round
             state = BattleState.After;
             return true;
         }
@@ -110,7 +111,7 @@ namespace BattleElements
         static bool Flee()
         {
             state = BattleState.During;
-            //Logic and animations for determining succesful Flee
+            //Logic and animations for determining successful Flee
             state = BattleState.After;
             return false;
         }
@@ -162,6 +163,7 @@ namespace BattleElements
                     return true;
                 }
             }
+            //enemy's turn
             else
             {
                 if (row == 1)

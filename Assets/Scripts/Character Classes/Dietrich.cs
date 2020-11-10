@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Dietrich : MonoBehaviour
 {
-    Mage characterClass = GameObject.Find("ArcanumOfTheMage").GetComponent<Mage>();
+    [SerializeField] Mage characterClass;
     Sprite characterSprite;
 
     // Start is called before the first frame update
     void Start()
     {
+        //this.characterClass = GameObject.Find("ArcanumOfTheMage").GetComponent<Mage>();
         this.characterSprite = gameObject.GetComponent<Sprite>();
     }
 

@@ -10,10 +10,7 @@ public abstract class GenericSkill : ScriptableObject
     private int baseAccuracy;
     protected string skillName;
     private damageTypes damageType;
-
-    private damageTypes DamageType { get => damageType;}
-
-    private enum damageTypes
+    public enum damageTypes
     {
         Fire,
         Water,
@@ -22,6 +19,10 @@ public abstract class GenericSkill : ScriptableObject
         Light,
         Earth
     }
+
+    public damageTypes DamageType { get => damageType;}
+
+    
 
     public abstract void InvokeSkill();
 }

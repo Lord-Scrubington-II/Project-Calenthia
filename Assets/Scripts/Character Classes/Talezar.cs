@@ -11,7 +11,7 @@ public class Talezar : MonoBehaviour
     void Start()
     {
         this.characterSprite = gameObject.GetComponent<Sprite>();
-        characterClass = GameObject.Find("BookOfTheKnight").GetComponent<Knight>();
+        //characterClass = GameObject.Find("BookOfTheKnight").GetComponent<Knight>();
         System.Console.WriteLine(characterClass.HPMax);
     }
 

@@ -13,7 +13,6 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private uint mpMax;
     [SerializeField] private uint healthPoints;
     [SerializeField] private uint magicPoints;
-    private Sprite sprite;
     private List<GenericSkill> skills;
     [SerializeField] private bool isDead = false;
     [SerializeField] private int level;
@@ -73,7 +72,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     }
 
     [SerializeField] private StatisticsBlock stats;
-    public int Level { get => level; set => level = value; }
+    public int Level { get => level; protected set => level = value; }
 
 
     //HP & MP
@@ -98,8 +97,11 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     public int MDefMod { get => mDefMod; set => mDefMod = value; }
     public int SpdMod { get => spdMod; set => spdMod = value; }
     public int LukMod { get => lukMod; set => lukMod = value; }
+
+    //skills
     public List<GenericSkill> Skills { get => skills; protected set => skills = value; }
 
+    //abstract combat methods
     public abstract int StandardAttack();
     public void Defend()
     {
@@ -118,6 +120,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
         isDead = false;
     }
 
+    //IComparable Implementation
     public int CompareTo(object other)
     {
         if(other.GetType() != typeof(GenericActor)){

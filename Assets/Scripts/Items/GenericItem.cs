@@ -11,7 +11,9 @@ public abstract class GenericItem: ScriptableObject{
     public enum ItemType {
         HealthPotion,
         ManaPotion,
-        Money
+        Money,
+        Weapon,
+        Armor
     }
 
 }

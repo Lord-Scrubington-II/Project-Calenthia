@@ -7,8 +7,9 @@ using System;
 /// Utilize the Mod... classes to create buffs and debuffs which affect 
 /// several stats at once 
 /// </summary>
-public class BuffDebuff
+public abstract class BuffDebuff
 {
-    int duration; 
-    List
+    
+    //Duration of the buff or debuff 
+    protected int duration;
 }

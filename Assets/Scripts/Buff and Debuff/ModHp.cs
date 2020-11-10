@@ -30,7 +30,7 @@ public class ModHp : ChangeMod
         }
         else
         {
-            uintNewHp = Convert.ToUint32(intNewHp);
+            uintNewHp = Convert.ToUInt32(intNewHp);
         }
 
         //Update

@@ -1,4 +1,4 @@
-using System.Runtime.Remoting.Messaging;
+//using System.Runtime.Remoting.Messaging; nani?
 using UnityEngine;
 using System;
 
@@ -6,11 +6,8 @@ using System;
 * Manage buffs and debuffs 
 */
 
-public interface ChangeMod
+public abstract class ChangeMod : BuffDebuff
 {
-    //Duration of the buff or debuff 
-    int duration;
-
     /// <summary>
     /// Method: Handles the debuff or buff change in stats
     /// </summary>
@@ -19,5 +16,5 @@ public interface ChangeMod
     /// <returns>
     /// The duration of the debuff or buff after execution
     /// </returns>
-    abstract int execute(GenericActor a, int percentChange, int dur);
+    public abstract int execute(GenericActor a, int percentChange, int dur);
 }

@@ -29,7 +29,7 @@ namespace BattleElements
         static TurnTimeTable turns;
         static GenericActor myTurn;
   
-        //Static Constructor for the static combat manager will will be autmatically called at the the
+        //Static Constructor for the static combat manager will be autmatically called at the the
         //first reference to it
         static CombatManager()
         {

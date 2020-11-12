@@ -5,10 +5,10 @@ using UnityEngine;
 
 public abstract class GenericSkill : ScriptableObject
 {
-    private ParticleSystem particles;
-    private int baseDamage;
-    private int baseAccuracy;
-    protected string skillName;
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private int baseDamage;
+    [SerializeField] private int baseAccuracy;
+    [SerializeField] protected string skillName;
     private damageTypes damageType;
     public enum damageTypes
     {

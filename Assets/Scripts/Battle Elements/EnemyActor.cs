@@ -4,7 +4,7 @@
     {
         public override void Flee()
         {
-            throw new System.NotImplementedException();
+            //initiate flee sequence for this actor only
         }
 
         public override int StandardAttack()

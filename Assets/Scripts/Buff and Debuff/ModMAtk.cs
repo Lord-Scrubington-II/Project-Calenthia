@@ -8,7 +8,6 @@ public class ModMAtk : ChangeMod
 {
     private const int CONVERTER = 100;
 
-    public override int execute() { return 0; }
     
     public override int execute(GenericActor actor, int percentChange, int dur)
     {

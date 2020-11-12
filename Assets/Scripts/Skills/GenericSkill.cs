@@ -6,8 +6,8 @@ using UnityEngine;
 public abstract class GenericSkill : ScriptableObject
 {
     [SerializeField] private ParticleSystem particles;
-    [SerializeField] private int baseDamage;
-    [SerializeField] private int baseAccuracy;
+    [SerializeField] protected int baseDamage;
+    [SerializeField] protected int baseAccuracy;
     [SerializeField] protected string skillName;
     private damageTypes damageType;
     public enum damageTypes

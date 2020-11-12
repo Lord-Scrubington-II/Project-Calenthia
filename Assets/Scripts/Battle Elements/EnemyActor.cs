@@ -1,7 +1,12 @@
-﻿namespace BattleElements
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace BattleElements
 {
-    internal class EnemyActor : GenericActor
+    public abstract class EnemyActor : GenericActor
     {
+        GenericItem heldItem;
         public override void Flee()
         {
             //initiate flee sequence for this actor only
@@ -15,5 +20,7 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public abstract void determineHeldItem();
     }
 }

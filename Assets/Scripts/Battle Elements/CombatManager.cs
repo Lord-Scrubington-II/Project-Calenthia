@@ -23,14 +23,14 @@ namespace BattleElements
 
 
         static GenericActor[] battleParticipants;
-        static GenericActor[] playerParty;
-        static GenericActor[] enemyFormation;
+        static PlayerActor[] playerParty;
+        static EnemyActor[] enemyFormation;
         static PlayerActor[] playerFrontline;
         static PlayerActor[] playerBackline;
         static TurnTimeTable turns;
         static GenericActor myTurn;
   
-        //Static Constructor for the static combat manager will be autmatically called at the the
+        //Static Constructor for the static combat manager will be automatically called at the
         //first reference to it
         static CombatManager()
         {
@@ -112,6 +112,19 @@ namespace BattleElements
         {
             state = BattleState.During;
             //Logic and animations for determining successful Flee
+            state = BattleState.After;
+            return false;
+        }
+
+        static bool EnemyFlee(EnemyActor enemy)
+        {
+            state = BattleState.During;
+            bool success = false;
+            //Logic and animations for determining successful Flee
+            if (success)
+            {
+                //remove enemy from EnemyData    
+            }
             state = BattleState.After;
             return false;
         }

@@ -21,8 +21,8 @@ public abstract class GenericSkill : ScriptableObject
     }
 
     public damageTypes DamageType { get => damageType;}
-
-    
+    public int BaseDamage { get => baseDamage;}
+    public int BaseAccuracy { get => baseAccuracy;}
 
     public abstract void InvokeSkill();
 }

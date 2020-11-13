@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //players interacting with objects
-public interface IInteractObject
+public interface IInteract
 {
 	void Interact();
 

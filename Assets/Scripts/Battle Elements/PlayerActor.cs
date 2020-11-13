@@ -14,17 +14,17 @@ public abstract class PlayerActor : GenericActor
     [System.Serializable]
     public struct GrowthRateMatrix
     {
-        [SerializeField] private uint hp;
-        [SerializeField] private uint mp;
-        [SerializeField] private uint attack;
-        [SerializeField] private uint mAttack;
-        [SerializeField] private uint defense;
-        [SerializeField] private uint mDefense;
-        [SerializeField] private uint speed;
-        [SerializeField] private uint luck;
+        [SerializeField] private int hp;
+        [SerializeField] private int mp;
+        [SerializeField] private int attack;
+        [SerializeField] private int mAttack;
+        [SerializeField] private int defense;
+        [SerializeField] private int mDefense;
+        [SerializeField] private int speed;
+        [SerializeField] private int luck;
 
 
-        public GrowthRateMatrix(uint HP, uint MP, uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+        public GrowthRateMatrix(int HP, int MP, int atk, int mAtk, int def, int mDef, int spd, int luk)
         {
             hp = HP;
             mp = MP;
@@ -37,14 +37,14 @@ public abstract class PlayerActor : GenericActor
         }
 
 
-        public uint AttackGrowth { get => attack; set => attack = value; }
-        public uint MAttackGrowth { get => mAttack; set => attack = value; }
-        public uint DefenseGrowth { get => defense; set => attack = value; }
-        public uint MDefenseGrowth { get => mDefense; set => attack = value; }
-        public uint SpeedGrowth { get => speed; set => attack = value; }
-        public uint LuckGrowth { get => luck; set => attack = value; }
-        public uint HPGrowth { get => hp; set => hp = value; }
-        public uint MPGrowth { get => mp; set => mp = value; }
+        public int AttackGrowth { get => attack; set => attack = value; }
+        public int MAttackGrowth { get => mAttack; set => attack = value; }
+        public int DefenseGrowth { get => defense; set => attack = value; }
+        public int MDefenseGrowth { get => mDefense; set => attack = value; }
+        public int SpeedGrowth { get => speed; set => attack = value; }
+        public int LuckGrowth { get => luck; set => attack = value; }
+        public int HPGrowth { get => hp; set => hp = value; }
+        public int MPGrowth { get => mp; set => mp = value; }
     }
 
     [SerializeField] private GrowthRateMatrix growthRates;
@@ -65,14 +65,14 @@ public abstract class PlayerActor : GenericActor
 
     public void LevelUp()
     {
-        uint HPMaxDelta = AllGrowthRates.HPGrowth;
-        uint MPMaxDelta = AllGrowthRates.MPGrowth;
-        uint ATKDelta = AllGrowthRates.AttackGrowth;
-        uint MATKDelta = AllGrowthRates.MAttackGrowth;
-        uint DEFDelta = AllGrowthRates.DefenseGrowth;
-        uint MDEFDelta = AllGrowthRates.MDefenseGrowth;
-        uint SPDDelta = AllGrowthRates.SpeedGrowth;
-        uint LUKDelta = AllGrowthRates.LuckGrowth;
+        int HPMaxDelta = AllGrowthRates.HPGrowth;
+        int MPMaxDelta = AllGrowthRates.MPGrowth;
+        int ATKDelta = AllGrowthRates.AttackGrowth;
+        int MATKDelta = AllGrowthRates.MAttackGrowth;
+        int DEFDelta = AllGrowthRates.DefenseGrowth;
+        int MDEFDelta = AllGrowthRates.MDefenseGrowth;
+        int SPDDelta = AllGrowthRates.SpeedGrowth;
+        int LUKDelta = AllGrowthRates.LuckGrowth;
 
         this.AllStats.ModAllStats(ATKDelta, MATKDelta, DEFDelta, MDEFDelta, SPDDelta, LUKDelta);
         this.HPMax = HPMaxDelta;
@@ -81,4 +81,44 @@ public abstract class PlayerActor : GenericActor
     }
 
     public abstract void LoadLevelOneStats();
+
+    public void PostBattleCleanUp()
+    {
+        AtkMod = 0;
+        MAtkMod = 0;
+        DefMod = 0;
+        MDefMod = 0;
+        SpdMod = 0;
+        LukMod = 0;
+    }
+
+    //Get True Stat Methods
+    //These should be changed to incorporate the statistics provided by armour and weapons
+    //to wit: weapon.attack; armour.defense
+    //To be safe, all weapons and armour need to have fields for all stats. set them to 0 if it provides
+    //no bonus for that stat.
+    public long GetTrueAttack()
+    {
+        return Attack + AtkMod;
+    }
+    public long GetTrueDefense()
+    {
+        return Defense + DefMod;
+    }
+    public long GetTrueMagicAttack()
+    {
+        return MagicAttack + MAtkMod;
+    }
+    public long GetTrueMagicDefense()
+    {
+        return MagicDefense + MDefMod;
+    }
+    public long GetTrueSpeed()
+    {
+        return Speed + SpdMod;
+    }
+    public long GetTrueLuck()
+    {
+        return Luck + LukMod;
+    }
 }

@@ -75,6 +75,7 @@ namespace BattleElements
             state = BattleState.During;
             int basedmg = myTurn.StandardAttack();
             //TODO: Call function from monobehavior attached to UI to display damage
+            //Writeline call to systemText noting damage, damage type, target, and attacker
             //Actual dmg calculation
             if (type == 0) ;
             if (type == 1) ;
@@ -104,6 +105,7 @@ namespace BattleElements
             state = BattleState.During;
             //TODO:implement skill
             //TODO: Animation 
+            //Writeline call to systemText noting skill name, damage/heal, type, target, and attacker
             state = BattleState.After;
             return true;
         }

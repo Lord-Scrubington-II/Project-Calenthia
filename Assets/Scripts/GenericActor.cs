@@ -10,14 +10,17 @@ using UnityEngine;
 /// </summary>
 public abstract class GenericActor : ScriptableObject, System.IComparable
 {
-    [SerializeField] private uint hpMax;
-    [SerializeField] private uint mpMax;
-    [SerializeField] private uint healthPoints;
-    [SerializeField] private uint magicPoints;
+    [Header("HP and MP")]
+    [SerializeField] private int hpMax;
+    [SerializeField] private int mpMax;
+    [SerializeField] private int healthPoints;
+    [SerializeField] private int magicPoints;
     private List<GenericSkill> skills;
+    private List<ChangeMod> statusEffects;
     [SerializeField] private bool isDead = false;
-    [SerializeField] private int level;
+    [SerializeField] private int level; //do not change this! eventually it will no longer be serialized, and instead viewable thru UI
 
+    [Header("Temporary Stat Modifications")]
     [SerializeField] private int atkMod;
     [SerializeField] private int defMod;
     [SerializeField] private int mAtkMod;
@@ -34,14 +37,15 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     {
         //I could have simply made GenericActors possess a 6-element array of unsigned ints, 
         //but this method allows for a more readable, abstract approach to stat manipulation (i.e. syntactic sugar)
-        [SerializeField] private uint attack;
-        [SerializeField] private uint magicAttack;
-        [SerializeField] private uint defense;
-        [SerializeField] private uint magicDefense;
-        [SerializeField] private uint speed;
-        [SerializeField] private uint luck;
 
-        public StatisticsBlock(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+        [SerializeField] private int attack;
+        [SerializeField] private int magicAttack;
+        [SerializeField] private int defense;
+        [SerializeField] private int magicDefense;
+        [SerializeField] private int speed;
+        [SerializeField] private int luck;
+
+        public StatisticsBlock(int atk, int mAtk, int def, int mDef, int spd, int luk)
         {
             attack = atk;
             magicAttack = mAtk;
@@ -55,7 +59,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
         /// Method: <c>ModAllStats</c> 
         /// To be called on level-up event, etc. For declaring /permanent/ changes to a Generic Actor's stats block.
         /// </summary>
-        public void ModAllStats(uint atk, uint mAtk, uint def, uint mDef, uint spd, uint luk)
+        public void ModAllStats(int atk, int mAtk, int def, int mDef, int spd, int luk)
         {
             Attack += atk;
             MagicAttack += mAtk;
@@ -64,12 +68,29 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
             Speed += spd;
             Luck += luk;
         }
-        public uint Attack { get => attack; set => attack = value; }
-        public uint MagicAttack { get => magicAttack; set => magicAttack = value; }
-        public uint Defense { get => defense; set => defense = value; }
-        public uint MagicDefense { get => magicDefense; set => magicDefense = value; }
-        public uint Speed { get => speed; set => speed = value; }
-        public uint Luck { get => luck; set => luck = value; }
+
+        /// <summary>
+        /// Method: <c>ListAllStats</c> 
+        /// Returns a list of the actor's stats as ints in the order of their declaration.
+        /// </summary>
+        public List<int> ListAllStats()
+        {
+            List<int> stats = new List<int>();
+            stats.Add(attack);
+            stats.Add(defense);
+            stats.Add(magicAttack);
+            stats.Add(magicDefense);
+            stats.Add(speed);
+            stats.Add(luck);
+            return stats;
+        }
+
+        public int Attack { get => attack; set => attack = value; }
+        public int MagicAttack { get => magicAttack; set => magicAttack = value; }
+        public int Defense { get => defense; set => defense = value; }
+        public int MagicDefense { get => magicDefense; set => magicDefense = value; }
+        public int Speed { get => speed; set => speed = value; }
+        public int Luck { get => luck; set => luck = value; }
     }
 
     [SerializeField] private StatisticsBlock stats;
@@ -77,19 +98,19 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
 
 
     //HP & MP
-    public uint CurrentHP { get => healthPoints; set => healthPoints = value; }
-    public uint CurrentMP { get => magicPoints; set => magicPoints = value; }
-    public uint HPMax { get => hpMax; protected set => hpMax = value; }
-    public uint MPMax { get => mpMax; protected set => mpMax = value; }
+    public int CurrentHP { get => healthPoints; set => healthPoints = value; }
+    public int CurrentMP { get => magicPoints; set => magicPoints = value; }
+    public int HPMax { get => hpMax; protected set => hpMax = value; }
+    public int MPMax { get => mpMax; protected set => mpMax = value; }
 
     //properties on the Statistics Block
     public StatisticsBlock AllStats { get => stats; protected set => stats = value; }
-    public uint Attack { get => stats.Attack; protected set => stats.Attack = value; }
-    public uint Defense { get => stats.Defense; protected set => stats.Defense = value; }
-    public uint MagicAttack { get => stats.MagicAttack; protected set => stats.MagicAttack = value; }
-    public uint MagicDefense { get => stats.MagicDefense; protected set => stats.MagicDefense = value; }
-    public uint Speed { get => stats.Speed; protected set => stats.Speed = value; }
-    public uint Luck { get => stats.Luck; protected set => stats.Luck = value; }
+    public int Attack { get => stats.Attack; protected set => stats.Attack = value; }
+    public int Defense { get => stats.Defense; protected set => stats.Defense = value; }
+    public int MagicAttack { get => stats.MagicAttack; protected set => stats.MagicAttack = value; }
+    public int MagicDefense { get => stats.MagicDefense; protected set => stats.MagicDefense = value; }
+    public int Speed { get => stats.Speed; protected set => stats.Speed = value; }
+    public int Luck { get => stats.Luck; protected set => stats.Luck = value; }
 
     //stat mods
     public int AtkMod { get => atkMod; set => atkMod = value; }
@@ -100,7 +121,8 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     public int LukMod { get => lukMod; set => lukMod = value; }
 
     //skills
-    public List<GenericSkill> Skills { get => skills; protected set => skills = value; }
+    public List<GenericSkill> Skills { get => skills; set => skills = value; }
+    public List<ChangeMod> StatusEffects { get => statusEffects; private set => statusEffects = value; }
 
     //abstract combat methods
     public abstract int StandardAttack();
@@ -153,5 +175,18 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     void Update()
     {
 
+    }
+
+    //TODO handle status immunities...
+    public bool attachStatusEffect(ChangeMod status)
+    {
+        if (StatusEffects.Contains(status)){
+            return false;
+        } 
+        else
+        {
+            this.StatusEffects.Add(status);
+            return true;
+        }
     }
 }

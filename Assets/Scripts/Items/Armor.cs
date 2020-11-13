@@ -8,8 +8,8 @@ public class Armor : GenericItem
     public string armorName;
     public string armorDesc;
 
-    public uint def;
-    public uint mdef;
+    public int def;
+    public int mdef;
 
     public Sprite artwork;
 }

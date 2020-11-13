@@ -5,25 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BookOfTheKnight", menuName = "Character Classes/Knight", order = 1)]
 public class Knight : PlayerActor
 {
-    private readonly uint BASE_HP = 100;
-    private readonly uint BASE_MP = 20;
+    private readonly int BASE_HP = 100;
+    private readonly int BASE_MP = 20;
 
-    private readonly uint BASE_ATK = 20;
-    private readonly uint BASE_MATK = 10;
-    private readonly uint BASE_DEF = 20;
-    private readonly uint BASE_MDEF = 17;
-    private readonly uint BASE_SPD = 12;
-    private readonly uint BASE_LUK = 16;
+    private readonly int BASE_ATK = 20;
+    private readonly int BASE_MATK = 10;
+    private readonly int BASE_DEF = 20;
+    private readonly int BASE_MDEF = 17;
+    private readonly int BASE_SPD = 12;
+    private readonly int BASE_LUK = 16;
 
-    private readonly uint HPG = 12;
-    private readonly uint MPG = 3;
+    private readonly int HPG = 12;
+    private readonly int MPG = 3;
 
-    private readonly uint ATKG = 8;
-    private readonly uint MATKG = 2;
-    private readonly uint DEFG = 8;
-    private readonly uint MDEFG = 5;
-    private readonly uint SPDG = 4;
-    private readonly uint LUKG = 4;
+    private readonly int ATKG = 8;
+    private readonly int MATKG = 2;
+    private readonly int DEFG = 8;
+    private readonly int MDEFG = 5;
+    private readonly int SPDG = 4;
+    private readonly int LUKG = 4;
 
     private void Awake()
     {

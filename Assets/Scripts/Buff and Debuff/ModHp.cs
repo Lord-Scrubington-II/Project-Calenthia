@@ -13,29 +13,18 @@ public class ModHp : ChangeMod
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
 
-        //NOTE: Since hp is unsigned, this conversion from uint to an int can 
+        //NOTE: Since hp is unsigned, this conversion from int to an int can 
         //throw an overflow exception 
-        int actorHp = Convert.ToInt32(actor.CurrentHP);
+        int actorHp = actor.CurrentHP;
 
         //Round the stat change
-        int statMod = (int)(Math.Round((percentVal * actorHp), MidpointRounding.AwayFromZero));
+        int statMod = (int)Math.Round((percentVal * actorHp), MidpointRounding.AwayFromZero);
 
         int intNewHp = actorHp - statMod;
 
-        //Convert newHp back to uint 
-        uint uintNewHp;
-        if (intNewHp <= 0)
-        {
-            uintNewHp = 0;
-        }
-        else
-        {
-            uintNewHp = Convert.ToUInt32(intNewHp);
-        }
-
         //Update
         //Note that duration can become negative. 
-        actor.CurrentHP = uintNewHp;
+        actor.CurrentHP = intNewHp;
         this.duration = --dur;
         return dur;
     }

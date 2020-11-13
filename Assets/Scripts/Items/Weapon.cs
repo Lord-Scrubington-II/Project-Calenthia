@@ -8,8 +8,8 @@ public class Weapon : GenericItem
     public string weaponName;
     public string weaponDesc;
 
-    public uint atk;
-    public uint matk;
+    public int atk;
+    public int matk;
 
     public Sprite artwork;
 }

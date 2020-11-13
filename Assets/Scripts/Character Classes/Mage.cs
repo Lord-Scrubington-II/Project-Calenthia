@@ -5,25 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArcanumOfTheMage", menuName = "Character Classes/Mage", order = 2)]
 public class Mage : PlayerActor
 {
-    private readonly uint BASE_HP = 80;
-    private readonly uint BASE_MP = 35;
+    private readonly int BASE_HP = 80;
+    private readonly int BASE_MP = 35;
 
-    private readonly uint BASE_ATK = 10;
-    private readonly uint BASE_MATK = 23;
-    private readonly uint BASE_DEF = 15;
-    private readonly uint BASE_MDEF = 20;
-    private readonly uint BASE_SPD = 18;
-    private readonly uint BASE_LUK = 14;
+    private readonly int BASE_ATK = 10;
+    private readonly int BASE_MATK = 23;
+    private readonly int BASE_DEF = 15;
+    private readonly int BASE_MDEF = 20;
+    private readonly int BASE_SPD = 18;
+    private readonly int BASE_LUK = 14;
 
-    private readonly uint HPG = 9;
-    private readonly uint MPG = 6;
+    private readonly int HPG = 9;
+    private readonly int MPG = 6;
 
-    private readonly uint ATKG = 2;
-    private readonly uint MATKG = 9;
-    private readonly uint DEFG = 4;
-    private readonly uint MDEFG = 8;
-    private readonly uint SPDG = 6;
-    private readonly uint LUKG = 4;
+    private readonly int ATKG = 2;
+    private readonly int MATKG = 9;
+    private readonly int DEFG = 4;
+    private readonly int MDEFG = 8;
+    private readonly int SPDG = 6;
+    private readonly int LUKG = 4;
     private void Awake()
     {
         //load from json all mutable fields

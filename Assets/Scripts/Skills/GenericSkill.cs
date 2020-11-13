@@ -6,23 +6,29 @@ using UnityEngine;
 public abstract class GenericSkill : ScriptableObject
 {
     [SerializeField] private ParticleSystem particles;
-    [SerializeField] protected int baseDamage;
-    [SerializeField] protected int baseAccuracy;
+    [SerializeField] private int baseDamage;
+    [SerializeField] private int baseAccuracy;
     [SerializeField] protected string skillName;
-    private damageTypes damageType;
-    public enum damageTypes
+    private int numHits;
+    protected DamageTypes damageType;
+    
+    public enum DamageTypes
     {
         Fire,
         Water,
         Wind,
         Lightning,
         Light,
-        Earth
+        Earth,
+        TypelessMagic,
+        Physical,
+        Healing
     }
 
-    public damageTypes DamageType { get => damageType;}
-    public int BaseDamage { get => baseDamage;}
-    public int BaseAccuracy { get => baseAccuracy;}
+    public DamageTypes DamageType { get => damageType; protected set => damageType = value; }
+    public int NumHits { get => numHits; protected set => numHits = value; }
+    public int BaseDamage { get => baseDamage; protected set => baseDamage = value; }
+    public int BaseAccuracy { get => baseAccuracy; protected set => baseAccuracy = value; }
 
     public abstract void InvokeSkill();
 }

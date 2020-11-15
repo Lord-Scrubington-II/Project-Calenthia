@@ -82,7 +82,7 @@ public abstract class ChangeMod
         double percentVal = (percentChange) / 100;
 
         //Round the stat change
-        int statMod = (int)(Math.Round((percentVal * actor.DefMod), MidpointRounding.AwayFromZero));
+        int statMod = (int)(Math.Round((percentVal * actor.Defense), MidpointRounding.AwayFromZero));
 
         //Update
         //Note that duration can be negative

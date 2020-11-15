@@ -1,3 +1,3 @@
 using System;
 
-public class Poison:
+public class Poison

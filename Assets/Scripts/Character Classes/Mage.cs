@@ -42,7 +42,7 @@ public class Mage : PlayerActor
         throw new System.NotImplementedException();
     }
 
-    public override void UseSkill(GenericSkill skill)
+    public override int UseSkill(GenericSkill skill)
     {
         throw new System.NotImplementedException();
     }

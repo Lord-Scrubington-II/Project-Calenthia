@@ -12,6 +12,14 @@ namespace BattleElements
         private List<GenericSkill.DamageTypes> weaknesses;
         private List<GenericSkill.DamageTypes> resistances;
 
+        public enum ActionTypes { 
+            StandardAttack,
+            Defend,
+            Flee,
+            Skill,
+            ShiftPosition
+        }
+
         public int BreakGauge { get => breakGauge; protected set => breakGauge = value; }
         public int BreakGaugeMax { get => breakGaugeMax; protected set => breakGaugeMax = value; }
 
@@ -19,16 +27,13 @@ namespace BattleElements
         {
             //initiate flee sequence for this actor only
         }
+        
+        //gacha go brrrrrr
+        public abstract void DetermineHeldItem();
 
-        public override int StandardAttack()
-        {
-            throw new System.NotImplementedException();
-        }
-        public override void UseSkill(GenericSkill skill)
-        {
-            throw new System.NotImplementedException();
-        }
+        //AI Methods
+        public abstract void SelectAction();
 
-        public abstract void determineHeldItem();
+        public abstract GenericActor SelectTarget();
     }
 }

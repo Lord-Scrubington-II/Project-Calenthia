@@ -5,11 +5,9 @@ using UnityEngine;
 public abstract class PlayerActor : GenericActor
 {
 
-    GenericItem weapon;
-    GenericItem armour;
+    private GenericItem weapon;
+    private GenericItem armour;
     protected bool isMartial;
-
-    public GrowthRateMatrix AllGrowthRates { get => growthRates; protected set => growthRates = value; }
 
     [System.Serializable]
     public struct GrowthRateMatrix
@@ -48,6 +46,10 @@ public abstract class PlayerActor : GenericActor
     }
 
     [SerializeField] private GrowthRateMatrix growthRates;
+
+    public GrowthRateMatrix AllGrowthRates { get => growthRates; protected set => growthRates = value; }
+    public GenericItem Weapon { get => weapon; protected set => weapon = value; }
+    public GenericItem Armour { get => armour; protected set => armour = value; }
 
     public override void Flee()
     {
@@ -92,32 +94,38 @@ public abstract class PlayerActor : GenericActor
         LukMod = 0;
     }
 
+    //use json utils to write fields to JSON
+    public void Serialize()
+    {
+
+    }
+
     //Get True Stat Methods
     //These should be changed to incorporate the statistics provided by armour and weapons
     //to wit: weapon.attack; armour.defense
     //To be safe, all weapons and armour need to have fields for all stats. set them to 0 if it provides
     //no bonus for that stat.
-    public long GetTrueAttack()
+    public override int GetTrueAttack()
     {
         return Attack + AtkMod;
     }
-    public long GetTrueDefense()
+    public override int GetTrueDefense()
     {
         return Defense + DefMod;
     }
-    public long GetTrueMagicAttack()
+    public override int GetTrueMagicAttack()
     {
         return MagicAttack + MAtkMod;
     }
-    public long GetTrueMagicDefense()
+    public override int GetTrueMagicDefense()
     {
         return MagicDefense + MDefMod;
     }
-    public long GetTrueSpeed()
+    public override int GetTrueSpeed()
     {
         return Speed + SpdMod;
     }
-    public long GetTrueLuck()
+    public override int GetTrueLuck()
     {
         return Luck + LukMod;
     }

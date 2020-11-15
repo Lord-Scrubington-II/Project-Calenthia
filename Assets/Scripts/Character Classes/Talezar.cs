@@ -12,7 +12,7 @@ public class Talezar : MonoBehaviour
     {
         this.characterSprite = gameObject.GetComponent<Sprite>();
         //characterClass = GameObject.Find("BookOfTheKnight").GetComponent<Knight>();
-        System.Console.WriteLine(characterClass.HPMax);
+        print(characterClass.HPMax);
     }
 
     // Update is called once per frame

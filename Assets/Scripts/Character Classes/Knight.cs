@@ -40,14 +40,14 @@ public class Knight : PlayerActor
         //this.Skills.Add(null);
     }
 
-    public override void UseSkill(GenericSkill skill)
+    public override int UseSkill(GenericSkill skill)
     {
-        
+        return 0;
     }
 
     public override int StandardAttack()
     {
-        throw new System.NotImplementedException();
+        return this.GetTrueAttack();
     }
 
     public override void LoadLevelOneStats()

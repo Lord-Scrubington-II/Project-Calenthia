@@ -16,7 +16,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private int healthPoints;
     [SerializeField] private int magicPoints;
     private List<GenericSkill> skills;
-    private List<GenericStatusEffect> statusEffects;
+    private List<BuffDebuff> statusEffects;
     [SerializeField] private bool isDead = false;
     [SerializeField] private int level; //do not change this! eventually it will no longer be serialized, and instead viewable thru UI
 
@@ -131,7 +131,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
 
     //skills
     public List<GenericSkill> Skills { get => skills; set => skills = value; }
-    public List<GenericStatusEffect> StatusEffects { get => statusEffects; private set => statusEffects = value; }
+    public List<BuffDebuff> StatusEffects { get => statusEffects; private set => statusEffects = value; }
 
     //abstract combat methods
     public abstract int StandardAttack();
@@ -187,7 +187,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     }
 
     //TODO handle status immunities...
-    public bool attachStatusEffect(ChangeMod status)
+    public bool attachStatusEffect(BuffDebuff status)
     {
         if (StatusEffects.Contains(status)){
             return false;

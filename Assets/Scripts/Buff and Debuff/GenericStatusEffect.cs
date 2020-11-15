@@ -10,5 +10,5 @@ public abstract class GenericStatusEffect
 
     //exists for method overloading. some status effects won't need to take params, maybe.
     //uncomment and implement as seen fit.
-    //public abstract void execute();
+    //public abstract void execute(GenericActor actor);
 }

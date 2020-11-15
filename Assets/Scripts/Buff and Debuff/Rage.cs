@@ -1,5 +1,3 @@
-using system; 
-
 public class Rage:BuffDebuff 
 {
 
@@ -12,7 +10,7 @@ public class Rage:BuffDebuff
 
     //double attack half defense 
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
+    public override int execute(GenericActor a, int percentChange)
     {
         ChangeMod.changeAtk(a, 100);
         ChangeMod.changeDef(a, -50);

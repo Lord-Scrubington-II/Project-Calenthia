@@ -5,13 +5,13 @@ using System;
 * Manage buffs and debuff creation 
 */
 
-public abstract class ChangeMod
+public class ChangeMod
 {
     //Constant for converting percentages 
     private const int CONVERTER = 100;
 
 
-    public void changeAtk(GenericActor actor, int percentChange)
+    public static void changeAtk(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
@@ -24,7 +24,7 @@ public abstract class ChangeMod
         actor.AtkMod = statMod;
     }
 
-    public void changeSpeed(GenericActor actor, int percentChange)
+    public static void changeSpeed(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
@@ -37,7 +37,7 @@ public abstract class ChangeMod
         actor.SpdMod = statMod;
     }
 
-    public void changeLuck(GenericActor actor, int percentChange)
+    public static void changeLuck(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
@@ -50,7 +50,7 @@ public abstract class ChangeMod
         actor.LukMod = statMod;
     }
 
-    public void changeMAtk(GenericActor actor, int percentChange)
+    public static void changeMAtk(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
@@ -63,7 +63,7 @@ public abstract class ChangeMod
         actor.MAtkMod = statMod;
     }
 
-    public void changeMDef(GenericActor actor, int percentChange)
+    public static void changeMDef(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
@@ -76,7 +76,7 @@ public abstract class ChangeMod
         actor.MDefMod = statMod;
     }
 
-    public void changeDef(GenericActor actor, int percentChange)
+    public static void changeDef(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;
@@ -89,7 +89,7 @@ public abstract class ChangeMod
         actor.DefMod = statMod;
     }
 
-    public void changeHp(GenericActor actor, int percentChange)
+    public static void changeHp(GenericActor actor, int percentChange)
     {
         //Retrieve percent val 
         double percentVal = (percentChange) / 100;

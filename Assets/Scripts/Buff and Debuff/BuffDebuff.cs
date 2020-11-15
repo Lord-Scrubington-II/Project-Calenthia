@@ -17,10 +17,11 @@ public abstract class BuffDebuff
     /// <returns>
     /// The duration of the debuff or buff after execution
     /// </returns>
-    public abstract int execute(GenericActor a, int percentChange, int dur);
+    public abstract int execute(GenericActor a, int percentChange);
 
     //Duration of the buff or debuff 
     public int duration;
+    public GenericActor actor;
 
     public override bool Equals(object bdebuff)
     {

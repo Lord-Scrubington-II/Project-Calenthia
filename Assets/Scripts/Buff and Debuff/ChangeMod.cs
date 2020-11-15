@@ -6,7 +6,7 @@ using System;
 * Manage buffs and debuffs 
 */
 
-public abstract class ChangeMod : BuffDebuff
+public abstract class ChangeMod : GenericStatusEffect
 {
     /// <summary>
     /// Method: Handles the debuff or buff change in stats

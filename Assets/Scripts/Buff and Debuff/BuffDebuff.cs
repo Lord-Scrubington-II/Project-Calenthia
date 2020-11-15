@@ -10,7 +10,5 @@ using System;
 public abstract class BuffDebuff
 {
     
-    //Duration of the buff or debuff 
-    protected int duration;
 
 }

@@ -16,7 +16,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private int healthPoints;
     [SerializeField] private int magicPoints;
     private List<GenericSkill> skills;
-    private List<ChangeMod> statusEffects;
+    private List<GenericStatusEffect> statusEffects;
     [SerializeField] private bool isDead = false;
     [SerializeField] private int level; //do not change this! eventually it will no longer be serialized, and instead viewable thru UI
 
@@ -96,6 +96,15 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private StatisticsBlock stats;
     public int Level { get => level; protected set => level = value; }
 
+    /// <summary>
+    /// Struct: <c>StatisticsBlock</c> 
+    /// This struct contains information about the Generic Actor's standard attack.
+    /// </summary>
+    public struct StandardAttackData
+    {
+
+    }
+
 
     //HP & MP
     public int CurrentHP { get => healthPoints; set => healthPoints = value; }
@@ -122,7 +131,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
 
     //skills
     public List<GenericSkill> Skills { get => skills; set => skills = value; }
-    public List<ChangeMod> StatusEffects { get => statusEffects; private set => statusEffects = value; }
+    public List<GenericStatusEffect> StatusEffects { get => statusEffects; private set => statusEffects = value; }
 
     //abstract combat methods
     public abstract int StandardAttack();
@@ -131,7 +140,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
         //TODO: Apply buff "defending" to the caller
     }
     public abstract void Flee();
-    public abstract void UseSkill(GenericSkill skill);
+    public abstract int UseSkill(GenericSkill skill);
 
     public void Kill()
     {
@@ -188,5 +197,29 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
             this.StatusEffects.Add(status);
             return true;
         }
+    }
+    public virtual int GetTrueAttack()
+    {
+        return Attack + AtkMod;
+    }
+    public virtual int GetTrueDefense()
+    {
+        return Defense + DefMod;
+    }
+    public virtual int GetTrueMagicAttack()
+    {
+        return MagicAttack + MAtkMod;
+    }
+    public virtual int GetTrueMagicDefense()
+    {
+        return MagicDefense + MDefMod;
+    }
+    public virtual int GetTrueSpeed()
+    {
+        return Speed + SpdMod;
+    }
+    public virtual int GetTrueLuck()
+    {
+        return Luck + LukMod;
     }
 }

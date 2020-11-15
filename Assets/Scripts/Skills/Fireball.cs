@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class Fireball : GenericSkill
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        //init target data
+        IsPercentSkill = false;
+        TargetsSelfOnly = false;
+        DamageType = DamageTypes.Fire;
+        TargetsGroup = TargetGroup.Single;
+        TargetsType = TargetType.Enemies;
         
+        //init effect data
+        NumHits = 1;
+        BaseEffectFactor = 3f;
+        BaseAccuracy = 100;
+        BaseBreakDamage = 50;
+        EffectPercent = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override int InvokeSkill()
     {
-        
+        return 0;
     }
 }

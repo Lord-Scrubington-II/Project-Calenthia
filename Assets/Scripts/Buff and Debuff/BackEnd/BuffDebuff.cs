@@ -12,27 +12,22 @@ public abstract class BuffDebuff
     /// <summary>
     /// Method: Handles the debuff or buff change in stats
     /// </summary>
-    /// <param name="percentChange"> Negative or positive val between 0 - 100</param>
     /// <param name="a"> The actor which this will applied</param>
     /// <returns>
     /// The duration of the debuff or buff after execution
     /// </returns>
-    public abstract int execute(GenericActor a, int percentChange);
+    public abstract int execute(GenericActor a);
 
     //Duration of the buff or debuff 
     public int duration;
     public GenericActor actor;
+    //Mainly just for HashCode() 
+    public String name; 
 
     public override bool Equals(object bdebuff)
     {
-        //Just in case null for some reason 
-        if (bdebuff == null)
-        {
-            return false;
-        }
-
-        //Ensure is of valid type 
-        if (!(bdebuff is BuffDebuff))
+        //Check null and valid type 
+        if (bdebuff == null || (!(bdebuff is BuffDebuff)))
         {
             return false;
         }
@@ -40,5 +35,12 @@ public abstract class BuffDebuff
         //Comparison by type 
         bool isEqual = this.GetType() == bdebuff.GetType();
         return isEqual;
+    }
+
+    //Not necessary, but hashCode() override just in case 
+    public override int GetHashCode()
+    {
+        //name is null hash is 0 else, name.GetHashCode
+        return (this.name != null ? this.name.GetHashCode() : 0);
     }
 }

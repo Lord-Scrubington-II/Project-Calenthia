@@ -1,23 +1,22 @@
 using System;
 
-public class Poison : BuffDebuff
+public class Regen : BuffDebuff
 {
 
     //Constructor initializing fields 
-    public Poison(int dur, GenericActor a)
+    public Regen(int dur, GenericActor a)
     {
         this.duration = dur;
         this.actor = a;
-        this.name = "Poison";
+        this.name = "Regen";
     }
 
-    //Detract hp
+    //Regen hp
     //param a: The actor to which this will be applied
     public override int execute(GenericActor a)
     {
-        //Poison will do 5% of total health per turn 
-        //TODO: Change if too punishing or not enough 
-        ChangeMod.changeHp(a, -5);
+        //Heal will do 7 percent total hp per turn 
+        ChangeMod.changeHp(a, 7);
         this.duration--;
         return this.duration;
     }

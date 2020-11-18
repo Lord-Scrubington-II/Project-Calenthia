@@ -20,7 +20,6 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Attack), MidpointRounding.AwayFromZero));
 
         //Update
-        //Note that duration can be negative
         actor.AtkMod = statMod;
     }
 
@@ -33,7 +32,6 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Speed), MidpointRounding.AwayFromZero));
 
         //Update
-        //Note that duration can be negative
         actor.SpdMod = statMod;
     }
 
@@ -46,7 +44,6 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Luck), MidpointRounding.AwayFromZero));
 
         //Update
-        //Note that duration can be negative
         actor.LukMod = statMod;
     }
 
@@ -59,7 +56,6 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.MagicAttack), MidpointRounding.AwayFromZero));
 
         //Update
-        //Note that duration can be negative
         actor.MAtkMod = statMod;
     }
 
@@ -72,7 +68,6 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.MagicDefense), MidpointRounding.AwayFromZero));
 
         //Update
-        //Note that duration can be negative
         actor.MDefMod = statMod;
     }
 
@@ -85,7 +80,6 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Defense), MidpointRounding.AwayFromZero));
 
         //Update
-        //Note that duration can be negative
         actor.DefMod = statMod;
     }
 
@@ -103,8 +97,13 @@ public class ChangeMod
 
         int intNewHp = actorHp - statMod;
 
+        // Prevent weird unsigned conversion of negative number 
+        if (intNewHp <= 0)
+        {
+            intNewHp = 0; 
+        }
+
         //Update
-        //Note that duration can become negative. 
         actor.CurrentHP = intNewHp;
     }
 }

@@ -6,11 +6,12 @@ public class Rage:BuffDebuff
     {
         this.duration = dur;
         this.actor = a;
+        this.name = "Rage";
     }
 
     //double attack half defense 
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a, int percentChange)
+    public override int execute(GenericActor a)
     {
         ChangeMod.changeAtk(a, 100);
         ChangeMod.changeDef(a, -50);

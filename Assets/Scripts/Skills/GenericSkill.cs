@@ -21,13 +21,17 @@ public abstract class GenericSkill : ScriptableObject
 
     private int numHits;
     private bool isPercentSkill;
+    private bool targetsSelfOnly;
+    private bool cannotTargetSelf;//for ovbious reasons, targetsSelfOnly and cannotTargetSelf cannot both be true
     private DamageTypes damageType;
     private TargetGroup targetsGroup;
     private TargetType targetsType;
-    private bool targetsSelfOnly;
+
 
     public enum DamageTypes
     {
+        Physical,
+        TypelessMagic,
         Fire,
         Water,
         Wind,
@@ -35,13 +39,12 @@ public abstract class GenericSkill : ScriptableObject
         Lightning,
         Light,
         Chaos,
-        TypelessMagic,
-        Physical,
-        Healing
+        Healing //negate effect number if healing
     }
     public enum TargetGroup
     {
         Single,
+        Row,
         All
     }
 
@@ -50,12 +53,13 @@ public abstract class GenericSkill : ScriptableObject
         Enemies,
         Allies,
         Actors,
-
     }
 
     //if true, disregard the 2-d target enum
     public bool TargetsSelfOnly { get => targetsSelfOnly; protected set => targetsSelfOnly = value; }
-    //if true, calculate damage based on the effectPercent int
+    //if true, the skill is unable to target self even if otherwise a valid AOE target
+    public bool CannotTargetSelf { get => cannotTargetSelf; protected set => cannotTargetSelf = value; }
+    //if true, calculate effect based on the effectPercent int
     public bool IsPercentSkill { get => isPercentSkill; protected set => isPercentSkill = value; }
 
     //target data
@@ -68,9 +72,7 @@ public abstract class GenericSkill : ScriptableObject
     public float BaseEffectFactor { get => baseEffectFactor; protected set => baseEffectFactor = value; }
     public int BaseAccuracy { get => baseAccuracy; protected set => baseAccuracy = value; }
     public int BaseBreakDamage { get => baseBreakDamage; protected set => baseBreakDamage = value; }
-    public int EffectPercent { get => effectPercent; set => effectPercent = value; }
-
-
+    public int EffectPercent { get => effectPercent; protected set => effectPercent = value; }
 
     public abstract int InvokeSkill();
 }

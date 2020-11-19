@@ -12,8 +12,8 @@ public abstract class GenericSkill : ScriptableObject
     [SerializeField] private int effectPercent;//0 -> 100
     [SerializeField] private int baseBreakDamage;
     [SerializeField] private int baseAccuracy;
-    [SerializeField] private List<GenericStatusEffect> statusInflictedToTarget;
-    [SerializeField] private List<GenericStatusEffect> statusAppliedToSelf;
+    [SerializeField] private List<BuffDebuff> statusInflictedToTarget;
+    [SerializeField] private List<BuffDebuff> statusAppliedToSelf;
 
     [Header("Skill Text")]
     [SerializeField] protected string skillName;

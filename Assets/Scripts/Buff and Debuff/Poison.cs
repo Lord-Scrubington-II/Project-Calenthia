@@ -8,13 +8,16 @@ public class Poison : BuffDebuff
     {
         this.duration = dur;
         this.actor = a;
+        this.name = "Poison";
     }
 
     //Detract hp
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a, int percentChange)
+    public override int execute(GenericActor a)
     {
-        ChangeMod.changeHp(a, percentChange);
+        //Poison will do 5% of total health per turn 
+        //TODO: Change if too punishing or not enough 
+        ChangeMod.changeHp(a, -5);
         this.duration--;
         return this.duration;
     }

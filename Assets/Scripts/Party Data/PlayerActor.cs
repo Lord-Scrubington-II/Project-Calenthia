@@ -5,8 +5,9 @@ using UnityEngine;
 public abstract class PlayerActor : GenericActor
 {
 
-    private GenericItem weapon;
-    private GenericItem armour;
+    private Weapon weapon;
+    private Armor armour;
+    private EquippableItem trinket;
     protected bool isMartial;
 
     [System.Serializable]
@@ -48,8 +49,9 @@ public abstract class PlayerActor : GenericActor
     [SerializeField] private GrowthRateMatrix growthRates;
 
     public GrowthRateMatrix AllGrowthRates { get => growthRates; protected set => growthRates = value; }
-    public GenericItem Weapon { get => weapon; protected set => weapon = value; }
-    public GenericItem Armour { get => armour; protected set => armour = value; }
+    public Weapon EquippedWeapon { get => weapon; set => weapon = value; }
+    public Armor EquippedArmour { get => armour; set => armour = value; }
+    public EquippableItem EquippedTrinket { get => trinket; set => trinket = value; }
 
     public override void Flee()
     {
@@ -92,6 +94,12 @@ public abstract class PlayerActor : GenericActor
         MDefMod = 0;
         SpdMod = 0;
         LukMod = 0;
+        StatusEffects.Clear();
+        if (this.IsDead)
+        {
+            this.CurrentHP = 1;
+            this.IsDead = false;
+        }
     }
 
     //use json utils to write fields to JSON
@@ -100,33 +108,33 @@ public abstract class PlayerActor : GenericActor
 
     }
 
-    //Get True Stat Methods
+    //Get True Stat Methods for player actors
     //These should be changed to incorporate the statistics provided by armour and weapons
     //to wit: weapon.attack; armour.defense
     //To be safe, all weapons and armour need to have fields for all stats. set them to 0 if it provides
     //no bonus for that stat.
     public override int GetTrueAttack()
     {
-        return Attack + AtkMod;
+        return Attack + AtkMod + EquippedWeapon.atk + EquippedArmour.atk + EquippedTrinket.atk;
     }
     public override int GetTrueDefense()
     {
-        return Defense + DefMod;
+        return Defense + DefMod + EquippedWeapon.def + EquippedArmour.def + EquippedTrinket.def;
     }
     public override int GetTrueMagicAttack()
     {
-        return MagicAttack + MAtkMod;
+        return MagicAttack + MAtkMod + EquippedWeapon.matk + EquippedArmour.matk + EquippedTrinket.matk;
     }
     public override int GetTrueMagicDefense()
     {
-        return MagicDefense + MDefMod;
+        return MagicDefense + MDefMod + EquippedWeapon.mdef + EquippedArmour.mdef + EquippedTrinket.mdef;
     }
     public override int GetTrueSpeed()
     {
-        return Speed + SpdMod;
+        return Speed + SpdMod + EquippedWeapon.spd + EquippedArmour.spd + EquippedTrinket.spd;
     }
     public override int GetTrueLuck()
     {
-        return Luck + LukMod;
+        return Luck + LukMod + EquippedWeapon.luk + EquippedArmour.luk + EquippedTrinket.luk;
     }
 }

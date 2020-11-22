@@ -15,8 +15,8 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private int mpMax;
     [SerializeField] private int healthPoints;
     [SerializeField] private int magicPoints;
-    private List<GenericSkill> skills;
-    private List<BuffDebuff> statusEffects;
+    private List<GenericSkill> skills = new List<GenericSkill>();
+    private List<BuffDebuff> statusEffects = new List<BuffDebuff>();
     [SerializeField] private bool isDead = false;
     [SerializeField] private int level; //do not change this! eventually it will no longer be serialized, and instead viewable thru UI
 
@@ -132,6 +132,7 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     //skills
     public List<GenericSkill> Skills { get => skills; set => skills = value; }
     public List<BuffDebuff> StatusEffects { get => statusEffects; private set => statusEffects = value; }
+    public bool IsDead { get => isDead; set => isDead = value; }
 
     //abstract combat methods
     public abstract int StandardAttack();
@@ -144,12 +145,12 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
 
     public void Kill()
     {
-        isDead = true;
+        IsDead = true;
     }
 
     public void Revive()
     {
-        isDead = false;
+        IsDead = false;
     }
 
     //IComparable Implementation
@@ -198,6 +199,8 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
             return true;
         }
     }
+
+    //Get True Stat Methods
     public virtual int GetTrueAttack()
     {
         return Attack + AtkMod;

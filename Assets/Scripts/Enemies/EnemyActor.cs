@@ -32,7 +32,7 @@ namespace BattleElements
         public abstract void DetermineHeldItem();
 
         //AI Methods
-        public abstract void SelectAction();
+        public abstract ActionTypes SelectAction();
 
         public abstract GenericActor SelectTarget();
     }

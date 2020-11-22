@@ -12,8 +12,8 @@ public abstract class GenericSkill : ScriptableObject
     [SerializeField] private int effectPercent;//0 -> 100
     [SerializeField] private int baseBreakDamage;
     [SerializeField] private int baseAccuracy;
-    [SerializeField] private List<BuffDebuff> statusInflictedToTarget;
-    [SerializeField] private List<BuffDebuff> statusAppliedToSelf;
+    [SerializeField] private List<BuffDebuff> statusInflictedToTarget = new List<BuffDebuff>();
+    [SerializeField] private List<BuffDebuff> statusAppliedToSelf = new List<BuffDebuff>();
 
     [Header("Skill Text")]
     [SerializeField] protected string skillName;
@@ -73,6 +73,8 @@ public abstract class GenericSkill : ScriptableObject
     public int BaseAccuracy { get => baseAccuracy; protected set => baseAccuracy = value; }
     public int BaseBreakDamage { get => baseBreakDamage; protected set => baseBreakDamage = value; }
     public int EffectPercent { get => effectPercent; protected set => effectPercent = value; }
+    public List<BuffDebuff> StatusInflictedToTarget { get => statusInflictedToTarget; protected set => statusInflictedToTarget = value; }
+    public List<BuffDebuff> StatusAppliedToSelf { get => statusAppliedToSelf; protected set => statusAppliedToSelf = value; }
 
     public abstract int InvokeSkill();
 }

@@ -1,2 +1,2 @@
-# Project-RPG
- RPG Project for Gamedev League
+# Project Calenthia
+ An RPG Project for the UCSD Gamedev League

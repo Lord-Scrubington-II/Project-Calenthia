@@ -18,7 +18,7 @@ namespace BattleElements
         //Game State enum, to be used for determining the game's state
         public enum TurnState { PlayerTurn, EnemyTurn, }
         public static TurnState turn;
-        public enum BattleState{ Preturn, During, After}
+        public enum BattleState{ BeforeTurn, DuringTurn, AfterTurn}
         public static BattleState state;
 
 
@@ -49,18 +49,18 @@ namespace BattleElements
                 turn = TurnState.PlayerTurn;
             else
                 turn = TurnState.EnemyTurn;
-            state = BattleState.Preturn;
+            state = BattleState.BeforeTurn;
         }
 
 
         static bool StandardAttack(GenericActor target)
         {
             int finaldmg = 0;
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             int basedmg = myTurn.StandardAttack();
             //TODO: Call function from monobehavior attached to UI to display damage
             //Actual dmg calculation
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             dealDmg(target, finaldmg);
             return true;
         }
@@ -72,7 +72,7 @@ namespace BattleElements
 
         static bool StandardAttack(GenericActor target, int type)
         {
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             int basedmg = myTurn.StandardAttack();
             //TODO: Call function from monobehavior attached to UI to display damage
             //Writeline call to systemText noting damage, damage type, target, and attacker
@@ -80,54 +80,54 @@ namespace BattleElements
             if (type == 0) ;
             if (type == 1) ;
             if (type == 2) ;
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             return true;
         }
         static bool UseItem(Consumable item, GenericActor target)
         {
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             item.Apply(target);
             //ToDO: animation
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             return true;
         }
 
         static bool Defend()
         {
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             //TODO Apply Buff Defense to player that buffs defense, and temp 999 speed increase to move them to top of next Round
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             return true;
         }
 
         static bool Skill(GenericSkill skill, List<GenericActor> targets)
         {
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             //TODO:implement skill
             //TODO: Animation 
             //Writeline call to systemText noting skill name, damage/heal, type, target, and attacker
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             return true;
         }
 
         static bool Flee()
         {
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             //Logic and animations for determining successful Flee
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             return false;
         }
 
         static bool EnemyFlee(EnemyActor enemy)
         {
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             bool success = false;
             //Logic and animations for determining successful Flee
             if (success)
             {
                 //remove enemy from EnemyData    
             }
-            state = BattleState.After;
+            state = BattleState.AfterTurn;
             return false;
         }
 
@@ -135,7 +135,7 @@ namespace BattleElements
         {
             GenericActor temp;
             int[] myPos = getPos();
-            state = BattleState.During;
+            state = BattleState.DuringTurn;
             if(turn == TurnState.PlayerTurn)
             {
                 if(row == 1)

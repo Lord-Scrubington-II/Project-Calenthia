@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6067746450656525850}
   - component: {fileID: 6067746450656525829}
   - component: {fileID: 6067746450656525828}
-  m_Layer: 0
-  m_Name: Troll
+  m_Layer: 8
+  m_Name: NPC
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

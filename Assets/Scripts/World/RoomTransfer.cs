@@ -9,10 +9,12 @@ namespace world {
         public Vector2 maxChange;
         public Vector3 playerChange;
         private CameraFollow camFollow;
+        private Transform movePoint;
 
         // Start is called before the first frame update
         void Start() {
             camFollow = Camera.main.GetComponent<CameraFollow>();
+            movePoint = GameObject.FindGameObjectWithTag("movePoint").transform;
         }
 
         // Update is called once per frame
@@ -25,6 +27,7 @@ namespace world {
 				camFollow.minPos = minChange;
                 camFollow.maxPos = maxChange;
                 collision.transform.position += playerChange;
+                movePoint.position = collision.transform.position;
             }
         }
     }

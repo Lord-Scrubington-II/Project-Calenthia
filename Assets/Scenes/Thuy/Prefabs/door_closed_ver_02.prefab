@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1981813011353275581}
   - component: {fileID: 4540588158637733489}
   - component: {fileID: 1541419957174422485}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: door_closed_ver_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

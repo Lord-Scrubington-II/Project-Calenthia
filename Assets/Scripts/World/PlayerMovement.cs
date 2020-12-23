@@ -11,20 +11,37 @@ namespace world {
 
         public float moveSpeed = 5f;
         public Rigidbody2D rb;
-        Vector2 move;
+        private Vector2 moveInput;
+        public Vector3 movePos;
+        
+        private bool isMoving;
 
-        public Transform movePoint;
+        //public Transform movePoint;
         public LayerMask stopMovement;
 
 		private void Start() {
-            movePoint.parent = null;
+            //movePoint.parent = null;
 		}
 
 		// Update is called once per frame
 		void Update() {
-            //move.x = Input.GetAxisRaw("Horizontal");
-            //move.y = Input.GetAxisRaw("Vertical");
+            if (!isMoving) {
+                moveInput.x = Input.GetAxisRaw("Horizontal");
+                moveInput.y = Input.GetAxisRaw("Vertical");
 
+                //prevent diagonal movement
+                if (moveInput.x != 0) moveInput.y = 0;
+
+                //if any input given changed movePos, call function to move
+                //player to that position
+                if (moveInput != Vector2.zero) {
+                    movePos = transform.position;
+                    movePos.x += moveInput.x;
+                    movePos.y += moveInput.y;
+                    StartCoroutine(Move());
+				}
+            }
+            /*
             transform.position = Vector3.MoveTowards(transform.position,
                 movePoint.position,
                 moveSpeed * Time.deltaTime);
@@ -45,10 +62,30 @@ namespace world {
                     }
                 }
             }
+            */
         }
 
         private void FixedUpdate() {
-            //rb.MovePosition(rb.position + move * moveSpeed * Time.fixedDeltaTime);
+            //MovePlayer();
+            //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         }
+
+        IEnumerator Move() {
+            isMoving = true;
+            //check player position vs movePosition, for player to move until
+            //it reaches the position
+            while((GetmovePos() - transform.position).sqrMagnitude > Mathf.Epsilon) {
+                transform.position = Vector3.MoveTowards(transform.position,
+                    movePos, moveSpeed * Time.deltaTime);
+
+                yield return null;
+			}
+            transform.position = movePos;
+            isMoving = false;
+		}
+
+        private Vector3 GetmovePos() {
+            return movePos;
+		}
     }
 }

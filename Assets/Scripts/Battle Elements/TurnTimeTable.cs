@@ -1,38 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace BattleElements
 { 
     public class TurnTimeTable: MonoBehaviour
     {
-        private System.Collections.Queue queueOne;
-        private System.Collections.Queue queueTwo;
+        private SortedSet<GenericActor> queueOne;
+        private SortedSet<GenericActor> queueTwo;
 
-        private System.Collections.Queue currentRound;
-        private System.Collections.Queue nextRound;
+        private SortedSet<GenericActor> currentRound;
+        private SortedSet<GenericActor> nextRound;
 
-        public Queue CurrentRound { get => currentRound; set => currentRound = value; }
-        public Queue NextRound { get => nextRound; set => nextRound = value; }
-
-        public void initializeTurnOrder(GenericActor[] actors)
-        {
-            
-        }
+        public SortedSet<GenericActor> CurrentRound { get => currentRound; set => currentRound = value; }
+        public SortedSet<GenericActor> NextRound { get => nextRound; set => nextRound = value; }
 
         public GenericActor advanceTurn()
         {
-            return null;
+            GenericActor turn = currentRound.Max;
+            currentRound.Remove(turn);
+            if(currentRound.Count == 0)
+            {
+                currentRound = queueTwo;
+            }
+            return turn;
         }
 
         private void updateNextRound()
         {
 
         }
-        private void Start()
 
+        public void SpeedChange(GenericActor target)
+        {
+
+        }
+
+        private void Start()
+        {
+
+        }
+
+        private void Awake()
         {
             this.name = "TimeTable";
+            queueOne = new SortedSet<GenericActor>(((GenericActor[])CombatManager.playerParty).Concat(CombatManager.enemyFormation), new SpeedComp());
+            currentRound = queueOne;
+            updateNextRound();
         }
     }
 }

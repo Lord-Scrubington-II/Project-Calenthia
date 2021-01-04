@@ -16,7 +16,9 @@ public abstract class BuffDebuff
     /// <returns>
     /// The duration of the debuff or buff after execution
     /// </returns>
-    public abstract int execute(GenericActor a);
+    public abstract int execute();
+    public abstract int initial();
+    public abstract int resolve();
 
     //Duration of the buff or debuff 
     public int duration;

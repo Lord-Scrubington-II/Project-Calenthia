@@ -22,7 +22,7 @@ namespace world {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             xOff = 0;
             yOff = 0;
-            zOff = -6; //"zoom distance away"
+            zOff = -10; //"zoom distance away"
 		}
 
 		//making the camera's position the same as the player's

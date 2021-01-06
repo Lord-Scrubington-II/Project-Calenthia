@@ -15,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - stopMovement
+  - SolidObjects
   - 
   - 
   - 
@@ -45,6 +45,12 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3412754907
+    locked: 0
+  - name: Foreground
+    uniqueID: 3972164521
+    locked: 0
+  - name: Transition
+    uniqueID: 2619675739
     locked: 0
   - name: Player
     uniqueID: 1162051739

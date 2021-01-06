@@ -10,7 +10,6 @@ namespace world {
     public class PlayerMovement : MonoBehaviour {
 
         public float moveSpeed = 5f;
-        public Rigidbody2D rb;
         private Vector2 moveInput;
         public Vector3 movePos;
 
@@ -18,8 +17,7 @@ namespace world {
         
         private bool isMoving;
 
-        //public Transform movePoint;
-        public LayerMask stopMovement;
+        public LayerMask SolidObjects;
 
 		private void Start() {
             //movePoint.parent = null;
@@ -47,7 +45,10 @@ namespace world {
                     movePos = transform.position;
                     movePos.x += moveInput.x;
                     movePos.y += moveInput.y;
-                    StartCoroutine(Move());
+
+                    //only move if there no collision in the area
+                    if(IsWalkable(movePos))
+                        StartCoroutine(Move());
 				}
             }
 
@@ -97,6 +98,17 @@ namespace world {
 
         private Vector3 GetmovePos() {
             return movePos;
+		}
+
+        private bool IsWalkable(Vector3 targetPos) {
+            /*if not null, it means there is a solid object in the path aka tile
+            not walkable
+            */
+            if (Physics2D.OverlapCircle(targetPos, 0.1f, SolidObjects) != null) {
+                return false;
+			}
+
+            return true;
 		}
     }
 }

@@ -25,6 +25,7 @@ namespace world {
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
+
             if (collision.CompareTag("Player")) {
 				camFollow.minPos = minChange;
                 camFollow.maxPos = maxChange;

@@ -10,21 +10,23 @@ namespace world {
     public class PlayerMovement : MonoBehaviour {
 
         public float moveSpeed = 5f;
-        public Rigidbody2D rb;
         private Vector2 moveInput;
         public Vector3 movePos;
+
+        private Animator animator;
         
         private bool isMoving;
 
-        //public Transform movePoint;
-        public LayerMask stopMovement;
+        public LayerMask SolidObjects;
 
 		private void Start() {
             //movePoint.parent = null;
+            animator = GetComponent<Animator>();
 		}
 
 		// Update is called once per frame
 		void Update() {
+
             if (!isMoving) {
                 moveInput.x = Input.GetAxisRaw("Horizontal");
                 moveInput.y = Input.GetAxisRaw("Vertical");
@@ -35,12 +37,22 @@ namespace world {
                 //if any input given changed movePos, call function to move
                 //player to that position
                 if (moveInput != Vector2.zero) {
+
+                    //grab float value for the animation direction
+                    animator.SetFloat("MoveX", moveInput.x);
+                    animator.SetFloat("MoveY", moveInput.y);
+
                     movePos = transform.position;
                     movePos.x += moveInput.x;
                     movePos.y += moveInput.y;
-                    StartCoroutine(Move());
+
+                    //only move if there no collision in the area
+                    if(IsWalkable(movePos))
+                        StartCoroutine(Move());
 				}
             }
+
+            animator.SetBool("isMoving", isMoving);
             /*
             transform.position = Vector3.MoveTowards(transform.position,
                 movePoint.position,
@@ -86,6 +98,17 @@ namespace world {
 
         private Vector3 GetmovePos() {
             return movePos;
+		}
+
+        private bool IsWalkable(Vector3 targetPos) {
+            /*if not null, it means there is a solid object in the path aka tile
+            not walkable
+            */
+            if (Physics2D.OverlapCircle(targetPos, 0.1f, SolidObjects) != null) {
+                return false;
+			}
+
+            return true;
 		}
     }
 }

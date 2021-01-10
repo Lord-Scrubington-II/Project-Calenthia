@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 
 /// <summary>
@@ -16,9 +13,21 @@ public abstract class BuffDebuff
     /// <returns>
     /// The duration of the debuff or buff after execution
     /// </returns>
-    public abstract int execute();
-    public abstract int initial();
-    public abstract int resolve();
+    public virtual int execute(GenericActor a)
+    {
+        if (duration == 0)
+        {
+            resolve(a);
+            return duration;
+        }
+        --duration;
+        return duration;
+    }
+
+    public virtual void resolve(GenericActor a)
+    {
+        return;
+    }
 
     //Duration of the buff or debuff 
     public int duration;

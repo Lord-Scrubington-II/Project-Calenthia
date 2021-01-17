@@ -18,7 +18,6 @@ public class Poison : BuffDebuff
         //Poison will do 5% of total health per turn 
         //TODO: Change if too punishing or not enough 
         ChangeMod.changeHp(a, -5);
-        this.duration--;
-        return this.duration;
+        return base.execute(a);
     }
 }

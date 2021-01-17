@@ -17,7 +17,7 @@ public class Sacrifice : BuffDebuff
 
     //Regen hp
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
+    public override int initialize(GenericActor a)
     {
         //NOTE: This is a very arbitrary designation subject to change
         //Kill off actor raise atk by 50%

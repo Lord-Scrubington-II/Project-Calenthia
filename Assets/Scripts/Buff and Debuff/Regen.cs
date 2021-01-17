@@ -17,7 +17,6 @@ public class Regen : BuffDebuff
     {
         //Heal will do 7 percent total hp per turn 
         ChangeMod.changeHp(a, 7);
-        this.duration--;
-        return this.duration;
+        return base.execute(a);
     }
 }

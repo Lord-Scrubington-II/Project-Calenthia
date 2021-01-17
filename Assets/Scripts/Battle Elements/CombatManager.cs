@@ -17,18 +17,16 @@ namespace BattleElements
 
         //Game State enum, to be used for determining the game's state
         public enum TurnState { PlayerTurn, EnemyTurn, }
-        public static TurnState turn;
+        public static TurnState turnState;
         public enum BattleState{ BeforeTurn, DuringTurn, AfterTurn}
-        public static BattleState state;
+        public static BattleState battleState;
 
-
-        static GenericActor[] battleParticipants;
-        static PlayerActor[] playerParty;
-        static EnemyActor[] enemyFormation;
-        static PlayerActor[] playerFrontline;
-        static PlayerActor[] playerBackline;
-        static TurnTimeTable turns;
-        static GenericActor myTurn;
+        public static PlayerActor[] playerParty;
+        public static EnemyActor[] enemyFormation;
+        public static PlayerActor[] playerFrontline;
+        public static PlayerActor[] playerBackline;
+        public static TurnTimeTable turntable;
+        public static GenericActor myTurn;
   
         //Static Constructor for the static combat manager will be automatically called at the
         //first reference to it
@@ -39,28 +37,30 @@ namespace BattleElements
             enemyFormation = EnemyData.Enemies;
             playerFrontline = PartyData.PlayerFrontline;
             playerBackline = PartyData.PlayerBackline;
-            battleParticipants = new GenericActor[playerParty.Length + enemyFormation.Length];
-            playerParty.CopyTo(battleParticipants, 0);
-            enemyFormation.CopyTo(battleParticipants, playerParty.Length);
-            turns = GameObject.Find("TimeTable").GetComponent<TurnTimeTable>();
-            turns.initializeTurnOrder(battleParticipants);
-            myTurn = (GenericActor)turns.CurrentRound.Dequeue();
-            if (myTurn.GetType() == typeof(PlayerActor))
-                turn = TurnState.PlayerTurn;
-            else
-                turn = TurnState.EnemyTurn;
-            state = BattleState.BeforeTurn;
+            turntable = GameObject.Find("TimeTable").GetComponent<TurnTimeTable>();
+            //Start Combat
+            nextTurn();
         }
 
+        static void nextTurn()
+        {
+            myTurn = turntable.advanceTurn();
+            if (myTurn.GetType() == typeof(PlayerActor))
+                turnState = TurnState.PlayerTurn;
+            else
+                turnState = TurnState.EnemyTurn;
+            battleState = BattleState.BeforeTurn;
+            //Debuffs
+        }
 
         static bool StandardAttack(GenericActor target)
         {
             int finaldmg = 0;
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             int basedmg = myTurn.StandardAttack();
             //TODO: Call function from monobehavior attached to UI to display damage
             //Actual dmg calculation
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             dealDmg(target, finaldmg);
             return true;
         }
@@ -72,7 +72,7 @@ namespace BattleElements
 
         static bool StandardAttack(GenericActor target, int type)
         {
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             int basedmg = myTurn.StandardAttack();
             //TODO: Call function from monobehavior attached to UI to display damage
             //Writeline call to systemText noting damage, damage type, target, and attacker
@@ -80,54 +80,54 @@ namespace BattleElements
             if (type == 0) ;
             if (type == 1) ;
             if (type == 2) ;
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             return true;
         }
         static bool UseItem(Consumable item, GenericActor target)
         {
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             item.Apply(target);
             //ToDO: animation
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             return true;
         }
 
         static bool Defend()
         {
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             //TODO Apply Buff Defense to player that buffs defense, and temp 999 speed increase to move them to top of next Round
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             return true;
         }
 
         static bool Skill(GenericSkill skill, List<GenericActor> targets)
         {
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             //TODO:implement skill
             //TODO: Animation 
             //Writeline call to systemText noting skill name, damage/heal, type, target, and attacker
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             return true;
         }
 
         static bool Flee()
         {
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             //Logic and animations for determining successful Flee
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             return false;
         }
 
         static bool EnemyFlee(EnemyActor enemy)
         {
-            state = BattleState.DuringTurn;
+            battleState = BattleState.DuringTurn;
             bool success = false;
             //Logic and animations for determining successful Flee
             if (success)
             {
                 //remove enemy from EnemyData    
             }
-            state = BattleState.AfterTurn;
+            battleState = BattleState.AfterTurn;
             return false;
         }
 
@@ -135,8 +135,8 @@ namespace BattleElements
         {
             GenericActor temp;
             int[] myPos = getPos();
-            state = BattleState.DuringTurn;
-            if(turn == TurnState.PlayerTurn)
+            battleState = BattleState.DuringTurn;
+            if(turnState == TurnState.PlayerTurn)
             {
                 if(row == 1)
                 {

@@ -20,7 +20,7 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Attack), MidpointRounding.AwayFromZero));
 
         //Update
-        actor.AtkMod = statMod;
+        actor.AtkMod += statMod;
     }
 
     public static void changeSpeed(GenericActor actor, int percentChange)
@@ -32,7 +32,7 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Speed), MidpointRounding.AwayFromZero));
 
         //Update
-        actor.SpdMod = statMod;
+        actor.SpdMod += statMod;
     }
 
     public static void changeLuck(GenericActor actor, int percentChange)
@@ -44,7 +44,7 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.Luck), MidpointRounding.AwayFromZero));
 
         //Update
-        actor.LukMod = statMod;
+        actor.LukMod += statMod;
     }
 
     public static void changeMAtk(GenericActor actor, int percentChange)
@@ -56,7 +56,7 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.MagicAttack), MidpointRounding.AwayFromZero));
 
         //Update
-        actor.MAtkMod = statMod;
+        actor.MAtkMod += statMod;
     }
 
     public static void changeMDef(GenericActor actor, int percentChange)
@@ -68,7 +68,7 @@ public class ChangeMod
         int statMod = (int)(Math.Round((percentVal * actor.MagicDefense), MidpointRounding.AwayFromZero));
 
         //Update
-        actor.MDefMod = statMod;
+        actor.MDefMod += statMod;
     }
 
     public static void changeDef(GenericActor actor, int percentChange)

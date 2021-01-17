@@ -9,15 +9,14 @@ public class MDefUp : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "MDefUp";
+        ChangeMod.changeMDef(a, 10);
     }
 
     //Regen hp
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
+    public override void resolve(GenericActor a)
     {
         //NOTE: This is a very arbitrary designation subject to change
-        ChangeMod.changeMDef(a, 10);
-        this.duration--;
-        return this.duration;
+        ChangeMod.changeMDef(a, -10);
     }
 }

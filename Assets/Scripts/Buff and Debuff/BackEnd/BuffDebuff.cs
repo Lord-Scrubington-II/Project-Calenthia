@@ -16,13 +16,20 @@ public abstract class BuffDebuff
     /// <returns>
     /// The duration of the debuff or buff after execution
     /// </returns>
-    public abstract int execute();
-    public abstract int initial();
-    public abstract int resolve();
+    /// 
+    public virtual int execute() {
+        if (duration == 0)
+            return resolve();
+        this.duration--;
+        return this.duration;
+    } 
+    public abstract int initial(); //The inital application of the buff, stat changes etc.
+    public abstract int resolve(); //Resolves the end of buff
 
     //Duration of the buff or debuff 
     public int duration;
     public GenericActor actor;
+    public ArrayList buffElements; //Elements that the buff needs to keep track of like stat changes, etc for the buff to resolve.
     //Mainly just for HashCode() 
     public String name; 
 

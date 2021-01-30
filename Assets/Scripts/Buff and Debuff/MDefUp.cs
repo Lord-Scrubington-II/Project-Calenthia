@@ -20,4 +20,19 @@ public class MDefUp : BuffDebuff
         this.duration--;
         return this.duration;
     }
+
+    public override int execute()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override int initial()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override int resolve()
+    {
+        throw new NotImplementedException();
+    }
 }

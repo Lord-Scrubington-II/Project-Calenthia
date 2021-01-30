@@ -20,14 +20,6 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private bool isDead = false;
     [SerializeField] private int level; //do not change this! eventually it will no longer be serialized, and instead viewable thru UI
 
-    [Header("Temporary Stat Modifications")]
-    [SerializeField] private int atkMod;
-    [SerializeField] private int defMod;
-    [SerializeField] private int mAtkMod;
-    [SerializeField] private int mDefMod;
-    [SerializeField] private int spdMod;
-    [SerializeField] private int lukMod;
-
     /// <summary>
     /// Struct: <c>StatisticsBlock</c> 
     /// This struct contains the stats of the Generic Actor.
@@ -94,6 +86,12 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     }
 
     [SerializeField] private StatisticsBlock stats;
+
+    [SerializeField] private StatisticsBlock mods;
+    [SerializeField] private int hpMod; //Not in statisticsblock
+
+
+
     public int Level { get => level; protected set => level = value; }
 
     /// <summary>
@@ -121,13 +119,15 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     public int Speed { get => stats.Speed; protected set => stats.Speed = value; }
     public int Luck { get => stats.Luck; protected set => stats.Luck = value; }
 
-    //stat mods
-    public int AtkMod { get => atkMod; set => atkMod = value; }
-    public int DefMod { get => defMod; set => defMod = value; }
-    public int MAtkMod { get => mAtkMod; set => mAtkMod = value; }
-    public int MDefMod { get => mDefMod; set => mDefMod = value; }
-    public int SpdMod { get => spdMod; set => spdMod = value; }
-    public int LukMod { get => lukMod; set => lukMod = value; }
+    //properties on the mods
+    public StatisticsBlock AllMods { get => mods; protected set => mods = value; }
+    public int AtkMod { get => mods.Attack; set => mods.Attack = value; }
+    public int DefMod { get => mods.Defense; set => mods.Defense = value; }
+    public int MAtkMod { get => mods.MagicAttack; set => mods.MagicAttack = value; }
+    public int MDefMod { get => mods.MagicDefense; set => mods.MagicDefense = value; }
+    public int SpdMod { get => mods.Speed; set => mods.Speed = value; }
+    public int LukMod { get => mods.Luck; set => mods.Luck = value; }
+    public int HPMod { get => hpMod; set => hpMod = value; }
 
     //skills
     public List<GenericSkill> Skills { get => skills; set => skills = value; }
@@ -224,5 +224,9 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     public virtual int GetTrueLuck()
     {
         return Luck + LukMod;
+    }
+    public virtual int GetTrueHPMax()
+    {
+        return HPMax + HPMod;
     }
 }

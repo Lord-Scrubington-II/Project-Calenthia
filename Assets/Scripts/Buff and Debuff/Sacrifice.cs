@@ -13,18 +13,24 @@ public class Sacrifice : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "Sacrifice";
+        buffElements = new System.Collections.ArrayList(2);
+        initial();
     }
 
-    //Regen hp
-    //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
+    public override int initial()
     {
         //NOTE: This is a very arbitrary designation subject to change
         //Kill off actor raise atk by 50%
-        ChangeMod.changeHp(a, -100);
-        ChangeMod.changeAtk(a, 50);
-        ChangeMod.changeMAtk(a, 50);
-        this.duration--;
-        return this.duration;
+        buffElements[0] = ChangeMod.changeAtk(actor, 50);
+        buffElements[1] = ChangeMod.changeMAtk(actor, 50);
+
+        return duration;
+    }
+
+    public override int resolve()
+    {
+        actor.AtkMod -= (int) buffElements[0];
+        actor.AtkMod -= (int) buffElements[0];
+        ChangeMod.changeHp(actor, -100);
     }
 }

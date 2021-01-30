@@ -19,6 +19,21 @@ public class Rage:BuffDebuff
         this.duration--;
         return this.duration;
     }
+
+    public override int execute()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override int initial()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override int resolve()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 

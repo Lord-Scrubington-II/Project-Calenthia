@@ -9,14 +9,17 @@ public class Regen : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "Regen";
+        buffElements = new int[1] { 7 };
+        initial();
     }
 
     //Regen hp
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
+    public override int execute()
     {
+        base.execute();
+
         //Heal will do 7 percent total hp per turn 
-        ChangeMod.changeHp(a, 7);
-        return base.execute(a);
+        return (-1) * ChangeMod.healordmg(actor, buffElements[0]);
     }
 }

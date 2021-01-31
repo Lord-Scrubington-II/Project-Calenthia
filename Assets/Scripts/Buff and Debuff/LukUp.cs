@@ -9,15 +9,18 @@ public class LukUp : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "LukUp";
+        buffElements = new int[1];
     }
 
-    //Regen hp
-    //param a: The actor to which this will be applied
-    public override int initialize(GenericActor a)
+    public override int initial()
     {
-        //NOTE: This is a very arbitrary designation subject to change
-        ChangeMod.changeLuck(a, 10);
-        this.duration--;
-        return this.duration;
+        buffElements[0] = ChangeMod.changeLuck(actor, 10);
+        return duration;
+    }
+
+    public override int resolve()
+    {
+        actor.LukMod -= buffElements[0];
+        return 0;
     }
 }

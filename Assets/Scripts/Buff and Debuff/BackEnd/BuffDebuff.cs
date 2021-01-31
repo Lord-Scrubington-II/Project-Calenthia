@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using System;
 
 /// <summary>
@@ -11,27 +14,32 @@ public abstract class BuffDebuff
     /// </summary>
     /// <param name="a"> The actor which this will applied</param>
     /// <returns>
-    /// The duration of the debuff or buff after execution
+    /// The dmg dealt, 0 if none
     /// </returns>
-    public virtual int execute(GenericActor a)
+    /// 
+    public virtual int execute()
     {
         if (duration == 0)
-        {
-            resolve(a);
-            return duration;
-        }
-        --duration;
+            return resolve();
+        this.duration--;
+        return 0;
+    }
+    
+    //The inital application of the buff, stat changes etc. Returns the duration.
+    public virtual int initial()
+    {
         return duration;
     }
 
-    public virtual void resolve(GenericActor a)
+    //Resolves the end of buff, return any dmg caused if any.
+    public virtual int resolve()
     {
-        return;
+        return 0;
     }
-
     //Duration of the buff or debuff 
     public int duration;
     public GenericActor actor;
+    public int[] buffElements; //Elements that the buff needs to keep track of like stat changes, etc for the buff to resolve.
     //Mainly just for HashCode() 
     public String name; 
 

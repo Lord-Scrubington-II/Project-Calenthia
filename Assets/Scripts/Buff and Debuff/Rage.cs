@@ -7,18 +7,25 @@ public class Rage:BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "Rage";
-        ChangeMod.changeAtk(a, 100);
-        ChangeMod.changeDef(a, -50);
-        ChangeMod.changeMDef(a, -50);
+        buffElements = new int[3];
+        initial();
     }
 
-    //double attack half defense 
-    //param a: The actor to which this will be applied
-    public override void resolve(GenericActor a)
+    //Double Attack Half Defense
+    public override int initial()
     {
-        ChangeMod.changeAtk(a, -100);
-        ChangeMod.changeDef(a, 50);
-        ChangeMod.changeMDef(a, 50); 
+        buffElements[0] = ChangeMod.changeAtk(actor, 100);
+        buffElements[1] = ChangeMod.changeDef(actor, -50);
+        buffElements[2] = ChangeMod.changeMDef(actor, -50);
+        return duration;
+    }
+
+    public override int resolve()
+    {
+        actor.AtkMod += (int) buffElements[0];
+        actor.DefMod += (int) buffElements[1];
+        actor.MDefMod += (int) buffElements[2];
+        return 0;
     }
 }
 

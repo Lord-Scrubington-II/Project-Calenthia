@@ -9,11 +9,19 @@ public class SpeedUp : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "SpeedUp";
-        ChangeMod.changeSpeed(a, 10);
+        buffElements = new int[1];
+        initial();
     }
 
-    public override void resolve(GenericActor a)
+    public override int initial()
     {
-        ChangeMod.changeSpeed(a, -10);
+        buffElements[0] = ChangeMod.changeSpeed(actor, 10);
+        return duration;
+    }
+
+    public override int resolve()
+    {
+        actor.SpdMod -= (int) buffElements[0];
+        return 0;
     }
 }

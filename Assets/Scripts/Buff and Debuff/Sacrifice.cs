@@ -13,7 +13,7 @@ public class Sacrifice : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "Sacrifice";
-        buffElements = new System.Collections.ArrayList(2);
+        buffElements = new int[2];
         initial();
     }
 
@@ -30,7 +30,7 @@ public class Sacrifice : BuffDebuff
     public override int resolve()
     {
         actor.AtkMod -= (int) buffElements[0];
-        actor.AtkMod -= (int) buffElements[0];
-        ChangeMod.changeHp(actor, -100);
+        actor.MAtkMod -= (int) buffElements[1];
+        return (-1) * ChangeMod.changeHp(actor, -100);
     }
 }

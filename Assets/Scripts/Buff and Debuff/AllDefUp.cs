@@ -9,31 +9,21 @@ public class AllDefUp : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "AllDefUp";
-    }
-
-    //Regen hp
-    //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
-    {
-        //NOTE: This is a very arbitrary designation subject to change
-        ChangeMod.changeMDef(a, 5);
-        ChangeMod.changeDef(a, 5);
-        this.duration--;
-        return this.duration;
-    }
-
-    public override int execute()
-    {
-        throw new NotImplementedException();
+        buffElements = new int[2];
+        initial();
     }
 
     public override int initial()
     {
-        throw new NotImplementedException();
+        buffElements[0] = ChangeMod.changeMDef(actor, 5);
+        buffElements[1] = ChangeMod.changeDef(actor, 5);
+        return duration;
     }
 
     public override int resolve()
     {
-        throw new NotImplementedException();
+        actor.MDefMod -= buffElements[0];
+        actor.DefMod -= buffElements[1];
+        return 0;
     }
 }

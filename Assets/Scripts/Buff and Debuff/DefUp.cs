@@ -9,30 +9,19 @@ public class DefUp : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "DefUp";
-    }
-
-    //Regen hp
-    //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
-    {
-        //NOTE: This is a very arbitrary designation subject to change
-        ChangeMod.changeDef(a, 10);
-        this.duration--;
-        return this.duration;
-    }
-
-    public override int execute()
-    {
-        throw new NotImplementedException();
+        buffElements = new int[1];
+        initial();
     }
 
     public override int initial()
     {
-        throw new NotImplementedException();
+        buffElements[0] = ChangeMod.changeDef(actor, 10);
+        return duration;
     }
 
     public override int resolve()
     {
-        throw new NotImplementedException();
+        actor.DefMod -= (int) buffElements[0];
+        return 0;
     }
 }

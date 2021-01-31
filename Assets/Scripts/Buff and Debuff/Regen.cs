@@ -9,30 +9,17 @@ public class Regen : BuffDebuff
         this.duration = dur;
         this.actor = a;
         this.name = "Regen";
+        buffElements = new int[1] { 7 };
+        initial();
     }
 
     //Regen hp
     //param a: The actor to which this will be applied
-    public override int execute(GenericActor a)
-    {
-        //Heal will do 7 percent total hp per turn 
-        ChangeMod.changeHp(a, 7);
-        this.duration--;
-        return this.duration;
-    }
-
     public override int execute()
     {
-        throw new NotImplementedException();
-    }
+        base.execute();
 
-    public override int initial()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override int resolve()
-    {
-        throw new NotImplementedException();
+        //Heal will do 7 percent total hp per turn 
+        return (-1) * ChangeMod.healordmg(actor, buffElements[0]);
     }
 }

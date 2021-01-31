@@ -14,22 +14,32 @@ public abstract class BuffDebuff
     /// </summary>
     /// <param name="a"> The actor which this will applied</param>
     /// <returns>
-    /// The duration of the debuff or buff after execution
+    /// The dmg dealt, 0 if none
     /// </returns>
     /// 
-    public virtual int execute() {
+    public virtual int execute()
+    {
         if (duration == 0)
             return resolve();
         this.duration--;
-        return this.duration;
-    } 
-    public abstract int initial(); //The inital application of the buff, stat changes etc.
-    public abstract int resolve(); //Resolves the end of buff
+        return 0;
+    }
+    
+    //The inital application of the buff, stat changes etc. Returns the duration.
+    public virtual int initial()
+    {
+        return duration;
+    }
 
+    //Resolves the end of buff, return any dmg caused if any.
+    public virtual int resolve()
+    {
+        return 0;
+    }
     //Duration of the buff or debuff 
     public int duration;
     public GenericActor actor;
-    public ArrayList buffElements; //Elements that the buff needs to keep track of like stat changes, etc for the buff to resolve.
+    public int[] buffElements; //Elements that the buff needs to keep track of like stat changes, etc for the buff to resolve.
     //Mainly just for HashCode() 
     public String name; 
 

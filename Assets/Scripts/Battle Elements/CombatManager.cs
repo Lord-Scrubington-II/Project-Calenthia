@@ -57,7 +57,7 @@ namespace BattleElements
         {
             int finaldmg = 0;
             battleState = BattleState.DuringTurn;
-            int basedmg = myTurn.StandardAttack();
+            int basedmg = myTurn.StandardAttack(target);
             //TODO: Call function from monobehavior attached to UI to display damage
             //Actual dmg calculation
             battleState = BattleState.AfterTurn;
@@ -73,7 +73,7 @@ namespace BattleElements
         static bool StandardAttack(GenericActor target, int type)
         {
             battleState = BattleState.DuringTurn;
-            int basedmg = myTurn.StandardAttack();
+            int basedmg = myTurn.StandardAttack(target);
             //TODO: Call function from monobehavior attached to UI to display damage
             //Writeline call to systemText noting damage, damage type, target, and attacker
             //Actual dmg calculation
@@ -87,7 +87,7 @@ namespace BattleElements
         {
             battleState = BattleState.DuringTurn;
             item.Apply(target);
-            //ToDO: animation
+            //TODO: animation
             battleState = BattleState.AfterTurn;
             return true;
         }
@@ -244,6 +244,39 @@ namespace BattleElements
         public static int CalculateDamage(int atk, int def)
         {
             return (atk * atk) / (atk + def);
+        }
+
+        /// <summary>
+        /// Func: <c>CalculateResistanceFactor</c> (Static)
+        /// <para>The default resistance factor formula used for all attack action resolutions.</para>
+        /// <para>
+        ///     The resistance factor is derived from a dictionary mapping damage types
+        ///     to floating point multipliers that range from 0 (immunity) to less than 1 (resistance)
+        ///     to greater than 1 (weakness). If lexical retrieval fails then that means there is no
+        ///     special multiplier for that resistance, i.e. neutrality. All Generic Actors possess
+        ///     this dictionary.
+        /// </para>
+        /// Params:
+        /// <para>
+        ///     <paramref name="damageType"/>: the damage type. 
+        ///     <paramref name="target"/>: the target.
+        /// </para>
+        /// </summary>
+        public static float CalculateResistanceFactor(GenericSkill.DamageTypes damageType, GenericActor target)
+        {
+            //handle elemental resistances
+            float resistanceFactor;
+            try
+            {
+                resistanceFactor = target.WeakResist[damageType];
+            }
+            catch (KeyNotFoundException)
+            {
+                //not resistant, use multiplier 1x
+                resistanceFactor = 1;
+            }
+
+            return resistanceFactor;
         }
     }
 }

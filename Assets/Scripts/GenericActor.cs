@@ -138,8 +138,24 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     public Dictionary<GenericSkill.DamageTypes, float> WeakResist { get => weakResist; protected set => weakResist = value; }
     public HashSet<BuffDebuff> StatusImmunities { get => statusImmunities; protected set => statusImmunities = value; }
 
-    //abstract combat methods
-    public abstract int StandardAttack();
+    //default behaviour for standard attack.
+    public virtual int StandardAttack(GenericActor target)
+    {
+        int atk;
+        int def;
+        int damage;
+        float resistanceFactor;
+
+        atk = this.GetTrueAttack();
+        def = target.GetTrueDefense();
+        resistanceFactor = BattleElements.CombatManager.CalculateResistanceFactor(GenericSkill.DamageTypes.Physical, target);
+        damage = (int)(resistanceFactor * BattleElements.CombatManager.CalculateDamage(atk, def));
+
+        target.CurrentHP -= damage;
+
+        return damage;
+    }
+
     public void Defend()
     {
         //TODO: Apply buff "defending" to the caller

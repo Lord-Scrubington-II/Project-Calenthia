@@ -126,13 +126,15 @@ public abstract class GenericSkill : ScriptableObject
                 //damage the target
                 def = target.GetTrueDefense();
                 damage = BattleElements.CombatManager.CalculateDamage(atk, def); //may be unnecessarily long.
-                try
+
+                //if a percent skill for some reason,
+                //overwrite damage calc with percent of target HP
+                if (isPercentSkill)
                 {
-                    //handle elemental resistances
-                    resistanceFactor = (int)(target.WeakResist[this.damageType]);
-                } catch (KeyNotFoundException) {
-                    resistanceFactor = 1;
+                    damage = target.HPMax * effectPercent;
                 }
+
+                resistanceFactor = BattleElements.CombatManager.CalculateResistanceFactor(this.damageType, target);
                 damage = (int)(damage * resistanceFactor);
                 target.CurrentHP -= damage;
 

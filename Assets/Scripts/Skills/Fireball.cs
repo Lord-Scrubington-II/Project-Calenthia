@@ -23,6 +23,7 @@ public class Fireball : GenericSkill
         //StatusInflictedToTarget[new Burn()] = 0.2f;
     }
 
+    //technically we don't even need this.
     public override void InvokeSkill(GenericActor caster, List<GenericActor> targets)
     {
         base.InvokeSkill(caster, targets);

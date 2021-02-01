@@ -15,8 +15,10 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
     [SerializeField] private int mpMax;
     [SerializeField] private int healthPoints;
     [SerializeField] private int magicPoints;
-    private List<GenericSkill> skills = new List<GenericSkill>();
-    private List<BuffDebuff> statusEffects = new List<BuffDebuff>();
+    protected List<GenericSkill> skills = new List<GenericSkill>();
+    protected List<BuffDebuff> statusEffects = new List<BuffDebuff>();
+    private HashSet<BuffDebuff> statusImmunities = new HashSet<BuffDebuff>();
+    private Dictionary<GenericSkill.DamageTypes, float> weakResist = new Dictionary<GenericSkill.DamageTypes, float>();
     [SerializeField] private bool isDead = false;
     [SerializeField] private int level; //do not change this! eventually it will no longer be serialized, and instead viewable thru UI
 
@@ -131,8 +133,10 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
 
     //skills
     public List<GenericSkill> Skills { get => skills; set => skills = value; }
-    public List<BuffDebuff> StatusEffects { get => statusEffects; private set => statusEffects = value; }
+    public List<BuffDebuff> StatusEffects { get => statusEffects; set => statusEffects = value; }
     public bool IsDead { get => isDead; set => isDead = value; }
+    public Dictionary<GenericSkill.DamageTypes, float> WeakResist { get => weakResist; protected set => weakResist = value; }
+    public HashSet<BuffDebuff> StatusImmunities { get => statusImmunities; protected set => statusImmunities = value; }
 
     //abstract combat methods
     public abstract int StandardAttack();
@@ -175,18 +179,6 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     //TODO handle status immunities...
     public bool attachStatusEffect(BuffDebuff status)
     {
@@ -198,6 +190,21 @@ public abstract class GenericActor : ScriptableObject, System.IComparable
             this.StatusEffects.Add(status);
             return true;
         }
+    }
+
+    //TODO handle status immunities...
+    public int attachStatusEffect(List<BuffDebuff> statuses)
+    {
+        int successes = 0;
+        foreach(BuffDebuff status in statuses)
+        {
+            if (!StatusEffects.Contains(status))
+            {
+                this.StatusEffects.Add(status);
+                successes++;
+            }
+        }
+        return successes;
     }
 
     //Get True Stat Methods

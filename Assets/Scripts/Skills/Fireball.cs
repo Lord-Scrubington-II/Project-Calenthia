@@ -20,10 +20,11 @@ public class Fireball : GenericSkill
         BaseAccuracy = 100;
         BaseBreakDamage = 50;
         EffectPercent = 0;
+        //StatusInflictedToTarget[new Burn()] = 0.2f;
     }
 
-    public override int InvokeSkill()
+    public override void InvokeSkill(GenericActor caster, List<GenericActor> targets)
     {
-        return 0;
+        base.InvokeSkill(caster, targets);
     }
 }

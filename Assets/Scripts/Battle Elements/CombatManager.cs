@@ -227,5 +227,23 @@ namespace BattleElements
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Func: <c>CalculateDamage</c> (Static)
+        /// <para>The default damage formula used for all attack action resolutions.</para>
+        /// <para>
+        ///     Current working damage formula: 
+        ///     <code>damage = (caster.atk)^2 / (caster.atk + target.def)</code>
+        /// </para>
+        /// Params:
+        /// <para>
+        ///     <paramref name="atk"/>: the attacker's attack. 
+        ///     <paramref name="def"/>: the target's defense.
+        /// </para>
+        /// </summary>
+        public static int CalculateDamage(int atk, int def)
+        {
+            return (atk * atk) / (atk + def);
+        }
     }
 }
